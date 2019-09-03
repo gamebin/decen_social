@@ -12,4 +12,5 @@ You can move your data whenever you want by using Linking.
 ### connectivity and openness
 Every social services which use social standard can be interoperable. 
 
-
+### standards
+[ActivityStream] https://www.w3.org/TR/activitystreams-core/
