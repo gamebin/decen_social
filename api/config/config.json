@@ -1,0 +1,72 @@
+{
+  "mode": "live",
+  "app_dev": {
+    "title": "--- KSHOP API TEST SERVER ---",
+    "port": 4000,
+    "s_port": 443
+  },
+  "app_live": {
+    "title": "--- KSHOP API LIVE SERVER ---",
+    "port": 3000,
+    "s_port": 443
+  },
+  "mysql_dev": {
+    "connectionLimit": 50,
+    "host": "gamekiki.duckdns.org",
+    "port": 3306,
+    "user": "kiki",
+    "password": "kiki@db",
+    "database": "kiki",
+    "timezone": "utc"
+  },
+  "mysql_live": {
+    "connectionLimit": 50,
+    "host": "172.17.42.1",
+    "port": 3306,
+    "user": "kiki",
+    "password": "kiki@db",
+    "database": "kiki",
+    "timezone": "utc"
+  },
+  "smtp": {
+    "host": "localhost",
+    "ssl": false,
+    "from": "no-reply@notfound.com"
+  },
+  "loglevel": "INFO",
+  "whitelist": [
+    "0.0.0.0",
+    "localhost",
+    "::1",
+    "127.0.0.1",
+    "192.168.0.1",
+    "gamebin.iptime.org",
+    "121.138.91.72",
+    "183.98.189.73",
+    "121.138.114.211",
+    "211.234.110.144"
+  ],
+  "development": {
+    "username": "kiki",
+    "password": "kiki@db",
+    "database": "kiki",
+    "host": "gamekiki.duckdns.org",
+    "port": 3306,
+    "dialect": "mysql"
+  },
+  "test": {
+    "username": "root",
+    "password": null,
+    "database": "database_test",
+    "host": "127.0.0.1",
+    "dialect": "mysql"
+  },
+  "production": {
+    "username": "kiki",
+    "password": "kiki@db",
+    "database": "kiki",
+    "host": "172.17.42.1",
+    "port": 3306,
+    "dialect": "mysql"
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "apps": [{
+    "name": "kshop_svr",
+    "script": "server.js",
+    "watch": false,
+    "env": {
+      "NODE_ENV": "production",
+      // "API_PORT": 3000
+    },
+    "exec_mode": "cluster",
+    "instances": "4"
+  }]
+}
