@@ -12,19 +12,19 @@
   },
   "mysql_dev": {
     "connectionLimit": 50,
-    "host": "gamekiki.duckdns.org",
+    "host": "",
     "port": 3306,
-    "user": "kiki",
-    "password": "kiki@db",
+    "user": "",
+    "password": "",
     "database": "kiki",
     "timezone": "utc"
   },
   "mysql_live": {
     "connectionLimit": 50,
-    "host": "172.17.42.1",
+    "host": "",
     "port": 3306,
-    "user": "kiki",
-    "password": "kiki@db",
+    "user": "",
+    "password": "",
     "database": "kiki",
     "timezone": "utc"
   },
@@ -47,8 +47,8 @@
     "211.234.110.144"
   ],
   "development": {
-    "username": "kiki",
-    "password": "kiki@db",
+    "username": "",
+    "password": "",
     "database": "kiki",
     "host": "gamekiki.duckdns.org",
     "port": 3306,
@@ -62,8 +62,8 @@
     "dialect": "mysql"
   },
   "production": {
-    "username": "kiki",
-    "password": "kiki@db",
+    "username": "",
+    "password": "",
     "database": "kiki",
     "host": "172.17.42.1",
     "port": 3306,

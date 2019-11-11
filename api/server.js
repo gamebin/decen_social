@@ -29,7 +29,7 @@ var $depth = 10; // node v4.2.x above
 var log_config = {
   appenders: [{
     type: "dateFile",
-    filename: "logs/kshop_svr.log",
+    filename: "logs/social_svr.log",
     pattern: ".yyyy-MM-dd",
     maxLogSize: 10485760,
     numBackups: 7,
@@ -65,7 +65,7 @@ var log_config = {
 
 log4js.configure(log_config);
 
-global.logger = log4js.getLogger('kshop_svr');
+global.logger = log4js.getLogger('social_svr');
 
 global.config = require('./config/config.json');
 global.errorcode = require('./config/errorcode.json');
