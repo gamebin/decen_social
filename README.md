@@ -29,7 +29,7 @@ Every social services which use social standard can be interoperable.
 
 ## License 
 
-see license [link]
+see license [https://github.com/gamebin/decen_social/blob/master/LICENSE]
 
 ## How to contribute
-Register github issue [link] 
+Register github issue [https://github.com/gamebin/decen_social/issues] 
