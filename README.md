@@ -1,3 +1,6 @@
+[![Build Status](https://travis-ci.org/gamebin/decen_social.svg?branch=master)](https://travis-ci.org/gamebin/decen_social)
+
+
 # decentralized social service - Linking
 'Linking' is a kind of social service like facebook or twitter. 
 But it's different from those services in view of service data authority.
