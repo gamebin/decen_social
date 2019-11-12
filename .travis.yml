@@ -1,0 +1,9 @@
+# .travis.yml 
+language: node_js
+node_js:
+  - 8.x
+before_install:
+  - npm install mocha -g
+branches:
+  only:
+    - master
