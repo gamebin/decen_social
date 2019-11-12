@@ -7,3 +7,5 @@ before_install:
 branches:
   only:
     - master
+env:
+- CODECOV_TOKEN="14faf464-41d3-40f9-bc72-1ba4640763e4"
