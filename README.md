@@ -37,4 +37,5 @@ see license [https://github.com/gamebin/decen_social/blob/master/LICENSE]
 
 ## How to contribute
 Register github issue [https://github.com/gamebin/decen_social/issues] 
+
 slack channerl : https://app.slack.com/client/TQE6FE71S/CQGFV7W8P
