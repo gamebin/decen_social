@@ -1,0 +1,61 @@
+@import "functions";
+@import "variables";
+
+html {
+  height: 100%;
+
+  body {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    padding-top: 40px;
+    padding-bottom: 40px;
+    background-color: $gray-100;
+
+    .form-signin {
+      width: 100%;
+      max-width: 330px;
+      padding: 15px;
+      margin: auto;
+
+      .checkbox {
+        font-weight: 400;
+      }
+
+      .form-control {
+        position: relative;
+        box-sizing: border-box;
+        height: auto;
+        padding: 10px;
+        font-size: 16px;
+
+        &:focus {
+          z-index: 2;
+        }
+      }
+
+      .sign-in-form input[type="email"] {
+        margin-bottom: -1px;
+        border-bottom-right-radius: 0;
+        border-bottom-left-radius: 0;
+      }
+
+      .sign-in-form input[type="password"] {
+        margin-bottom: 10px;
+        border-top-left-radius: 0;
+        border-top-right-radius: 0;
+      }
+
+      .signin-links {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around;
+
+        a {
+          color: $text-muted;
+          font-size: $small-font-size;
+        }
+      }
+    }
+  }
+}
