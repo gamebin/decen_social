@@ -1,0 +1,31 @@
+@import "../../assets/vendor/bootstrap-4.3.1/scss/functions";
+@import "../../assets/vendor/bootstrap-4.3.1/scss/variables";
+@import "offcanvas";
+
+html {
+  body {
+    .avatar {
+      width: 2rem;
+      line-height: 2rem;
+      background-size: cover;
+      border-radius: 50%;
+      text-align: center;
+
+      &.avatar-lg {
+        width: 3rem;
+        line-height: 3rem;
+        
+      }
+      i {
+        color: rgba($text-muted, 0.2);
+      }
+    }
+  }
+}
+
+@media (min-width: 992px) {
+  html {
+    body {
+    }
+  }
+}
