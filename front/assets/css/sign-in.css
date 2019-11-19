@@ -27,11 +27,11 @@ html {
         font-size: 16px; }
         html body .form-signin .form-control:focus {
           z-index: 2; }
-      html body .form-signin .sign-in-form input[type="email"] {
+      html body .form-signin input[type="email"].sign-in-form {
         margin-bottom: -1px;
         border-bottom-right-radius: 0;
         border-bottom-left-radius: 0; }
-      html body .form-signin .sign-in-form input[type="password"] {
+      html body .form-signin input[type="password"].sign-in-form {
         margin-bottom: 10px;
         border-top-left-radius: 0;
         border-top-right-radius: 0; }

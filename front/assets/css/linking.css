@@ -90,6 +90,10 @@ body {
   .bd-placeholder-img-lg {
     font-size: 3.5rem; } }
 
+html body .table tr th,
+html body .table tr td {
+  word-break: keep-all; }
+
 html body .post {
   margin: 1rem 0;
   padding: 1rem;
@@ -117,7 +121,10 @@ html body .post {
       margin: 0 0 0 0.5rem;
       display: block; }
 
-html body .reply .user-name, html body .reply .date, html body .re-reply .user-name, html body .re-reply .date {
+html body .reply .user-name,
+html body .reply .date,
+html body .re-reply .user-name,
+html body .re-reply .date {
   line-height: 2; }
 
 html body .re-reply {

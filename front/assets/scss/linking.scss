@@ -4,6 +4,16 @@
 
 html {
   body {
+
+    .table {
+      tr {
+        th,
+        td {
+          word-break: keep-all;;
+        }
+      }
+    }
+
     .post {
       margin: 1rem 0;
       padding: 1rem;
@@ -18,14 +28,14 @@ html {
         .user-name {
           font-size: $font-size-base;
           margin: 0 0 0 0.5rem;
-          
+
           display: inline;
           // font-weight: $font-weight-normal;
         }
         .user-link {
           font-size: $font-size-sm;
           text-decoration: dotted;
-          
+
           margin: 0 0 0 0.25rem;
         }
         .date {
@@ -36,8 +46,10 @@ html {
       }
     }
 
-    .reply, .re-reply {
-      .user-name, .date {
+    .reply,
+    .re-reply {
+      .user-name,
+      .date {
         line-height: 2;
       }
     }
@@ -58,7 +70,6 @@ html {
       &.avatar-lg {
         width: 3rem;
         height: 3rem;
-       
       }
 
       &.avatar-xl {
@@ -75,7 +86,6 @@ html {
     background-size: cover;
     background-position: center center;
   }
-
 }
 
 @media (min-width: 992px) {
