@@ -4,8 +4,8 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <link href="https://fonts.googleapis.com/css?family=Noto+Sans+KR:400,700&display=swap&subset=korean" rel="stylesheet">
-  <link rel="stylesheet" href="../assets/css/bootstrap.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Noto+Sans+KR:400,700|Roboto:400,700&display=swap&subset=korean">
+  <link rel="stylesheet" href="../assets/css/bootstrap.min.css">
   <link rel="stylesheet" href="../assets/css/sign-in.css">
   <title>회원가입 - Linking: Decentralized Social Networking</title>
 </head>
@@ -18,13 +18,37 @@
 
     <label for="inputUserName" class="sr-only">아이디</label>
     <input type="email" id="inputnickname" class="form-control mb-3" placeholder="아이디" required="" autofocus="">
+
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+      <strong>사용 가능한 아이디</strong>입니다.
+      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+      <strong>이미 존재하는 아이디</strong>입니다.
+      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+
     <label for="inputName" class="sr-only">이름</label>
     <input type="email" id="inputName" class="form-control mb-3" placeholder="이름" required="">
     <label for="inputEmail" class="sr-only">이메일</label>
     <input type="email" id="inputEmail" class="form-control mb-3" placeholder="이메일" required="">
     <label for="inputPassword" class="sr-only">비밀번호</label>
     <input type="password" id="inputPassword" class="form-control mb-3" placeholder="비밀번호" required="">
+    <label for="inputPassword2" class="sr-only">비밀번호 확인</label>
     <input type="password" id="inputPassword2" class="form-control mb-3" placeholder="비밀번호 확인" required="">
+
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+      <strong>비밀번호</strong>가 일치하지 않습니다.
+      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+
     <button class="btn btn-lg btn-outline-dark btn-block" type="submit">가입하기</button>
     <div class="signin-links my-3"><a href="#">로그인</a><a href="#">아이디 확인</a><a href="#">비밀번호 확인</a></div>
     <p class="mt-5 mb-3 text-muted">© 2019</p>
@@ -33,6 +57,15 @@
   <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+  <script>
+    $(document).ready(function () {
+      $(".btn").click(function () {
+        $('.alert').alert()
+      });
+    });
+  </script>
+
 </body>
 
 </html>
