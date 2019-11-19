@@ -1,0 +1,50 @@
+html {
+  height: 100%; }
+  html body {
+    height: 100%;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    padding-top: 40px;
+    padding-bottom: 40px;
+    background-color: #f8f9fa; }
+    html body .form-signin {
+      width: 100%;
+      max-width: 330px;
+      padding: 15px;
+      margin: auto; }
+      html body .form-signin .checkbox {
+        font-weight: 400; }
+      html body .form-signin .form-control {
+        position: relative;
+        -webkit-box-sizing: border-box;
+        box-sizing: border-box;
+        height: auto;
+        padding: 10px;
+        font-size: 16px; }
+        html body .form-signin .form-control:focus {
+          z-index: 2; }
+      html body .form-signin .sign-in-form input[type="email"] {
+        margin-bottom: -1px;
+        border-bottom-right-radius: 0;
+        border-bottom-left-radius: 0; }
+      html body .form-signin .sign-in-form input[type="password"] {
+        margin-bottom: 10px;
+        border-top-left-radius: 0;
+        border-top-right-radius: 0; }
+      html body .form-signin .signin-links {
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-box-orient: horizontal;
+        -webkit-box-direction: normal;
+        -ms-flex-direction: row;
+        flex-direction: row;
+        -ms-flex-pack: distribute;
+        justify-content: space-around; }
+        html body .form-signin .signin-links a {
+          color: #6c757d;
+          font-size: 80%; }
