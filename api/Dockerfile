@@ -1,8 +1,6 @@
 # Use latest node version 8.x
 FROM node:8.10.0
 
-MAINTAINER GAMEKIKI <paul@gamebin.co.kr>
-
 # create app directory in container
 RUN mkdir -p /app
 
