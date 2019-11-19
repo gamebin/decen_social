@@ -67,6 +67,15 @@ html {
       }
     }
   }
+
+  .thumbnail {
+    width: 2rem;
+    height: 2rem;
+    background-image: url("../img/bg-landscape.png");
+    background-size: cover;
+    background-position: center center;
+  }
+
 }
 
 @media (min-width: 992px) {
