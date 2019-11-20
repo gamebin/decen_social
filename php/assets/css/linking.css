@@ -90,14 +90,64 @@ body {
   .bd-placeholder-img-lg {
     font-size: 3.5rem; } }
 
+html body .table tr th,
+html body .table tr td {
+  word-break: keep-all; }
+
+html body .post {
+  margin: 1rem 0;
+  padding: 1rem;
+  background-color: #fff;
+  -webkit-box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+  box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075); }
+  html body .post .post-header {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-line-pack: center;
+    align-content: center;
+    line-height: 1.25; }
+    html body .post .post-header .user-name {
+      font-size: 1rem;
+      margin: 0 0 0 0.5rem;
+      display: inline; }
+    html body .post .post-header .user-link {
+      font-size: 0.875rem;
+      -webkit-text-decoration: dotted;
+      text-decoration: dotted;
+      margin: 0 0 0 0.25rem; }
+    html body .post .post-header .date {
+      color: #6c757d;
+      margin: 0 0 0 0.5rem;
+      display: block; }
+
+html body .reply .user-name,
+html body .reply .date,
+html body .re-reply .user-name,
+html body .re-reply .date {
+  line-height: 2; }
+
+html body .re-reply {
+  margin-left: 1rem; }
+
 html body .avatar {
   width: 2rem;
-  line-height: 2rem;
+  height: 2rem;
+  background-image: url("../img/profile-square.png");
   background-size: cover;
+  background-position: center center;
   border-radius: 50%;
   text-align: center; }
   html body .avatar.avatar-lg {
     width: 3rem;
-    line-height: 3rem; }
-  html body .avatar i {
-    color: rgba(108, 117, 125, 0.2); }
+    height: 3rem; }
+  html body .avatar.avatar-xl {
+    width: 5rem;
+    height: 5rem; }
+
+html .thumbnail {
+  width: 2rem;
+  height: 2rem;
+  background-image: url("../img/bg-landscape.png");
+  background-size: cover;
+  background-position: center center; }
