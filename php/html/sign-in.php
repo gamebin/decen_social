@@ -26,7 +26,7 @@ location.href = "./timeline.php"
     <input type="text" id="inputEmail" maxlength="20" class="form-control sign-in-form" placeholder="아이디" required="" autofocus="">
     <label for="inputPassword" class="sr-only">비밀번호</label>
     <input type="password" id="inputPassword" class="form-control sign-in-form" onkeyup="passwd_onkeyup(event)" maxlength="15" placeholder="비밀번호" required="">
-    <button class="btn btn-lg btn-outline-dark btn-block" onclick="fn_sign_in()" type="button">로그인</button>
+    <button class="btn btn-lg btn-outline-primary btn-block" onclick="fn_sign_in()" type="button">로그인</button>
     <div class="signin-links my-3"><a href="./sign-up.php">회원 가입</a><a href="./find-userid.php">아이디 확인</a><a href="./find-password.php">비밀번호 확인</a></div>
     <p class="mt-5 mb-3 text-muted">© 2019</p>
 </form>

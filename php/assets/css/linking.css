@@ -99,7 +99,8 @@ html body .post {
   padding: 1rem;
   background-color: #fff;
   -webkit-box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
-  box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075); }
+  box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+  border-radius: 0.25rem; }
   html body .post .post-header {
     display: -webkit-box;
     display: -ms-flexbox;

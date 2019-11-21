@@ -19,7 +19,7 @@ function fn_sign_in() {
 		},
 		success: function (data) {
 		  if(data.prog == "true"){
-			  location.href = "./timeline.php"
+			  location.href = "./profile.php"
 		  } else {
 			alert(data.msg);
 		  }
@@ -415,6 +415,7 @@ function tomail() {
 		return ret;
 	}
 }
+
 function checkpw() 	 {
 	ret1 = true;
 		var strTmp = $("#passwd").val();
@@ -479,7 +480,7 @@ function checkpw2() {
        }
     }
     if(tmp1!=0 || tmp2==0 || tmp4==0 || password.length<4 || password.length>15){
-	    text = "<strong>비밀번호</strong>는 영문과 숫자의 조합 4~12자리내에서 입력하세요"
+	    text = "<strong>비밀번호</strong>는 영문과 숫자의 조합 4~15자리내에서 입력하세요"
 	    $("#passwd_danger_text").html(text);
 	    $("#passwd_danger_text").show();
 
