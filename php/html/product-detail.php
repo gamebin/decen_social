@@ -22,7 +22,7 @@ location.href = "./sign-in.php"
 	include "./inc_nav.php";
 	$num = kiki_isnumb($_POST["num"]);
 
-	$SQL = "Select boardSerno, a.userid, username, title, image ";
+	$SQL = "Select boardSerno, a.userid, username, title, productLink, image ";
 	$SQL .= ", imageurl, a.regYHS, reviewcnt, boardtext, price ";
 	$SQL .= ", (select count(likedSerno) from db_liked where a.boardSerno ";
 	$SQL .= " = boardSerno and userId ='$UserID' and likeFlag = '1') as likeSerno ";
@@ -37,6 +37,8 @@ location.href = "./sign-in.php"
 		$username = stripslashes($username);
 		$title = $row["title"];
 		$title = stripslashes($title);
+		$productLink = $row["productLink"];
+		$productLink = stripslashes($productLink);
 		$image = $row["image"];
 		$image = stripslashes($image);
 IF ($image) {
@@ -113,10 +115,16 @@ IF ($imageurl) {
           </div>
 <?	}	?>
           <p><?=$boardtext?></p>
+ 
+		  <div class="row">
+            <div class="col-12 col-lg-4 mb-3 my-lg-4"><button type="button" class="btn btn-block btn-outline-primary"><?=$price?>원</button></div>
+<?	if ($productLink) {  ?>
+			<div class="col-12 col-lg-8 mb-3 my-lg-4"><a href="<?=$productLink?>" target="_blank" class="btn btn-block btn-primary">구매하러 가기</a></div>
+<?	}	?>
+          </div>
 
           <div class="d-flex justify-content-between mt-3">
             <p class="m-0">
-              <span><?=$price?>원</span>
               <button type="button" onclick="btn_liked('<?=$num?>')" class="btn btn-sm btn-light"><i id="liked_txt" class="<?=$liked_txt?>"></i></button>
 			  <button type="button" class="btn btn-sm btn-light"><i class="far fa-heart fa-lg"></i></button>
               <button type="button" class="btn btn-sm btn-light" data-toggle="collapse" href="#collapseReply" role="button" aria-expanded="false"><i class="fas fa-comment fa-lg"></i></button>
@@ -192,6 +200,7 @@ function btn_liked(num) {
 	    }
  	});
 }
+
 function GoWrite(num) {
     if ($("#review_cont").val().length < 1) {
         alert("댓글을 입력하세요.");

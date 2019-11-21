@@ -1,31 +1,32 @@
+  <meta charset="utf-8">
 <?php	
 	include "./this_user.php";
 
 	$no = kiki_isnumb($_POST["num"]) ;
 	$review = kiki_ischar($_POST["review"]) ;
 	$UserIP =  $_SERVER["REMOTE_ADDR"];
-
-	$SQL = "INSERT INTO product_review (boardSerno";
+//$no = "3";
+	$SQL = "INSERT INTO db_review (boardSerno";
 	$SQL .= ", userId, review, regYHS, userIp )";
 	$SQL .= "  values ( '$no'";
 	$SQL .= ", '$UserID' ";
 	$SQL .= ", '$review' ";
 	$SQL .= ", now() ";
 	$SQL .= ", '$UserIP' )" ;
-	$result = mysqli_query($kiki_conn, $SQL);
+/**/	$result = mysqli_query($kiki_conn, $SQL);
 	if ( $result === false ) {
 	   die( print_r( mysqli_connect_error(), true));
-	}
+	} 
 
-	$SQL = "UPDATE db_product SET reviewcnt = (select count(reviewSerno) from ";
-	$SQL .= " product_review where boardSerno = $no ) where boardSerno = $no ";
+	$SQL = "UPDATE db_board SET reviewcnt = (select count(reviewSerno) from ";
+	$SQL .= " db_review where boardSerno = $no ) where boardSerno = $no ";
 	$result = mysqli_query($kiki_conn, $SQL);
 	if ( $result === false ) {
 	   die( print_r( mysqli_connect_error(), true));
 	}
-	$board = "product_review";
+	$board = "db_review";
 	$pagesize = 5;
-	$page_cont = "pro_con01";
+	$cur_page = 1;
 
 	$wheStr = "a.boardSerno = '$no'";
 	$SQL = "Select count(reviewSerno) as totcnt from $board a";
@@ -46,7 +47,6 @@
 	if ($totpage < $cur_page) {
 		$cur_page = $totpage;
 	}
-	$cur_page = 1;
 	if($totcnt == 0) {
 $result_stmt .= "<div class='w-100 text-center text-muted py-5'> 자료가 없습니다. </div> ";
 	}  Else {
@@ -56,7 +56,7 @@ $result_stmt .= "<div class='w-100 text-center text-muted py-5'> 자료가 없�
 		$SQL = "Select reviewSerno, a.userid, username, review, image, a.regYHS ";
 		$SQL .= " from $board a inner join db_user b ON a.userid = b.userid where $wheStr ";
 		$SQL .= " order by reviewSerno desc limit $start, $pagesize ";
-
+//echo $SQL;
 		$result = mysqli_query($kiki_conn, $SQL);
 		if( $result === false) {
 		} else {
@@ -94,7 +94,7 @@ $result_stmt .= "  <small class='date ml-auto'>$regYHS</small> ";
 $result_stmt .= " </div> ";
 $result_stmt .= " <p class='small'>$review ";
 	if ($reviewuserid == $UserID and $UserID) {
-$result_stmt .= "  <a href='javascript:remove_review(\"$reviewSerno\")' class='ml-1'>삭제</a> "; 
+$result_stmt .= "  <a href='javascript:remove_review_board(\"$reviewSerno\",\"$no\")' class='ml-1'>삭제</a> "; 
 	}
 $result_stmt .= " </p> ";
 $result_stmt .= "</div> ";

@@ -124,7 +124,6 @@ function go_detail(num, uri){
 }
 </script>
 
-
 </body>
 </html>
 <form name="list" method="post">

@@ -7,7 +7,7 @@ header('charset=UTF-8');
 	setcookie("UserID", "", -1,"/","www.linking.kr");
 	setcookie("UserID", "", -1,"/",$this_domain);
 
-	$redirectUrl = "./index.php";
+	$redirectUrl = "./sign-in.php";
 mysqli_close ($kiki_conn);		?>
 
 <script>

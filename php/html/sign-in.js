@@ -19,7 +19,7 @@ function fn_sign_in() {
 		},
 		success: function (data) {
 		  if(data.prog == "true"){
-			  location.href = "./profile.php"
+			  location.href = "./timeline.php"
 		  } else {
 			alert(data.msg);
 		  }

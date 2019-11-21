@@ -35,7 +35,7 @@ $result_stmt .= "<div class='w-100 text-center text-muted py-5'> 자료가 없�
 		$SQL .= ", imageurl, a.regYHS, reviewcnt, boardtext, price ";
 		$SQL .= ", (select count(likedSerno) from db_liked where a.boardSerno ";
 		$SQL .= " = boardSerno and userId ='$UserID' and likeFlag = '1') as likeSerno ";
-		$SQL .= " from $board a inner join db_user b where $wheStr ";
+		$SQL .= " from $board a inner join db_user b ON a.userid = b.userid ";
 		$SQL .= " order by boardSerno desc limit $start, $pagesize ";
 		$result = mysqli_query($kiki_conn, $SQL);
 		if( $result === false) {
@@ -94,13 +94,13 @@ IF ($imageurl) {
 
 $result_stmt .= "<article class='post'> ";
 $result_stmt .= " <div class='post-header mb-3'> ";
-$result_stmt .= "  <div class='avatar' style='background-image: url('$profileImg');'></div> ";
+$result_stmt .= "  <div class='avatar' style='background-image: url(\"$profileImg\");'></div> ";
 $result_stmt .= "  <div> ";
 $result_stmt .= "   <h6 class='user-name'>$username</h6> ";
 $result_stmt .= "   <a href='javascript:go_profile(\"$userid\")' class='user-link'>linking.kr/$userid</a> ";
 $result_stmt .= "   <small class='date'>$regYHS</small> ";
 $result_stmt .= "  </div> ";
-	if ($userid == $UserID and !$UserID) {
+	if ($userid == $UserID and $UserID) {
 $result_stmt .= "  <a href='#' class='ml-auto text-muted' id='post-menu-01' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false'><i class='fas fa-ellipsis-h'></i></a> ";
 $result_stmt .= "  <div class='dropdown-menu' aria-labelledby='post-menu-01'> ";
 $result_stmt .= "   <a class='dropdown-item' href='#'>삭제</a> ";
@@ -117,7 +117,7 @@ $result_stmt .= " <p>$boardtext <a href='javascript:go_detail(\'$no\')' class='m
 
 $result_stmt .= " <div class='d-flex justify-content-between mt-3'> ";
 $result_stmt .= "  <p class='m-0'> ";
-$result_stmt .= "   <span>$price원</span> ";
+$result_stmt .= "   <a href='#' class='btn btn-outline-primary'>".$price."원</a> ";
 $result_stmt .= "   <button type='button' class='btn btn-sm btn-light'><i id='liked_txt_$no' class='$liked_txt'></i></button> ";
 $result_stmt .= "   <!--            <button type='button' class='btn btn-sm btn-light' data-toggle='collapse' role='button' aria-expanded='false'><i class='fas fa-comment fa-lg'></i></button> ";
 $result_stmt .= "   <button type='button' class='btn btn-sm btn-light'><i class='fas fa-share-alt fa-lg'></i></button>	--> ";

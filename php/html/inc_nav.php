@@ -1,5 +1,5 @@
   <nav class="navbar navbar-expand-lg fixed-top navbar-dark bg-primary shadow-sm" style="background: linear-gradient(135deg, rgba(0,212,255,1) 0%, rgba(0,123,255,1) 100%);">
-    <a class="navbar-brand mr-auto mr-lg-0" href="#"><img src="../assets/img/logo-light.svg" style="height: 2rem;"></a>
+    <a class="navbar-brand mr-auto mr-lg-0" href="./timeline.php"><img src="../assets/img/logo-light.svg" style="height: 2rem;"></a>
     <button class="navbar-toggler p-0 border-0" type="button" data-toggle="offcanvas">
       <span class="navbar-toggler-icon"></span>
     </button>
