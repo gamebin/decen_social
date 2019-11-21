@@ -16,7 +16,7 @@ if ($passwd <> "") {
 
 if ($UserID <> "" and $passwd <> "" ) {
 	$SQL = "select userid, userpasswd from db_user ";
-	$SQL .= " where userid = '$UserID' and gubun = '9' delFlag = 'N'";
+	$SQL .= " where userid = '$UserID' and gubun = '9' and delFlag = 'N'";
 	$result = mysqli_query($kiki_conn, $SQL);
 	if( $result === false) {
 		 die( print_r( mysqli_connect_error(), true) );

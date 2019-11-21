@@ -1,7 +1,7 @@
-<?  $kiki_conn = mysqli_connect("localhost","linkin","linkin!@db#$") or die("SQL Server 에 연결할 수 없습니다.". mysqli_connect_error());
+<?  $kiki_conn = mysqli_connect("127.0.0.1","linkin","linkin!@db#$") or die("SQL Server 에 연결할 수 없습니다.". mysqli_connect_error());
  mysqli_select_db($kiki_conn, 'linking_db') or die("SQL Server 에 연결할 수 없습니다.". mysqli_connect_error()); 
 $kiki_conn->set_charset("utf8");
-
+error_reporting(0);
 $passadmin = "anjfkfRk"	;	
 $hostname=$_SERVER["HTTP_HOST"]; 
 

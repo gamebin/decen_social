@@ -8,6 +8,7 @@
   <link rel="stylesheet" href="../assets/css/bootstrap.min.css">
   <link rel="stylesheet" href="../assets/css/sign-in.css">
   <title>로그인 - Linking 관리자</title>
+  <script src="sign-in.js"></script>
 </head>
 
 <?	$UserID = $_COOKIE["UserID"];
