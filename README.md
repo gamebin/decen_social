@@ -33,7 +33,7 @@ DB consists of real DB to develop the your own service as a guide. You can also 
 As now, we support mysql[https://www.mysql.com]
 
 other folders
-- [front] this folder consists of some HTML files as a examples to make your own design.
+- [example] this folder consists of some HTML files as a examples to make your own design.
 
 ### own your data 
 Imagine that the facebook or twitter shut-down. You can not get your data !!
