@@ -220,7 +220,7 @@ function GoWrite(num) {
 	      $("#pro_con01").empty();
 		  $(data).appendTo($("#pro_con01"));
 		  reviewcnt = $("#reviewcnt").text();
-		  reviewcnt = Number(pg) + 1;
+		  reviewcnt = Number(reviewcnt) + 1;
 	      $("#reviewcnt").text(reviewcnt);
 	      $("#review_cont").val('');
 	    },

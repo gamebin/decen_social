@@ -45,7 +45,7 @@ console.log("num="+num)
 		  $(data).appendTo($("#pro_con01_"+num));
 	      $("#review_cont_"+num).val('');
 		  reviewcnt = $("#review_cnt_"+num).text();
-		  reviewcnt = Number(pg) + 1;
+		  reviewcnt = Number(reviewcnt) + 1;
 	      $("#review_cnt_"+num).text(reviewcnt);
 	    },
         error: function(xhr, status, error) {
@@ -56,7 +56,7 @@ console.log("num="+num)
 
 function remove_review_board(reviewSerno, num) {
 	$.ajax({
-        url: './timeline_review_removelikedAjax.php?callback=?',
+        url: './timeline_review_removeAjax.php?callback=?',
         type: 'POST',
 		data: {
 		  "reviewSerno": reviewSerno,
@@ -67,7 +67,7 @@ function remove_review_board(reviewSerno, num) {
         success: function (data) {
 			if(data.prog == "true"){
 			  $("#review_"+reviewSerno).remove();
-//			  $("#reviewcnt").text(data.reviewcnt);
+			  $("#review_cnt_"+num).text(data.reviewcnt);
 			} else {
 				alert(data.msg);
 			}

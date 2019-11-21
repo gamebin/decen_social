@@ -239,7 +239,7 @@ IF ($reviewimage) {
             </div> 
             <p class='small'><?=$review?> 
 <?	if ($reviewuserid == $UserID and $UserID) {	?>
-             <a href='javascript:remove_review("<?=$reviewSerno?>")' class='ml-1'>삭제</a>  
+             <a href='javascript:remove_review_board("<?=$reviewSerno?>","<?=$boardSerno?>")' class='ml-1'>삭제</a>  
 <?	}	?>
             </p> 
            </div> 
