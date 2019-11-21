@@ -18,7 +18,7 @@
       <span class="navbar-toggler-icon"></span>
     </button>
 
-    <div class="navbar-collapse offcanvas-collapse" id="navbarsExampleDefault">
+    <div class="navbar-collapse offcanvas-collapse">
       <ul class="navbar-nav ml-auto">
         <li class="nav-item active">
           <a class="nav-link" href="#"><i class="fas fa-box-open"></i> <span class="d-inline d-lg-none ml-1">상품 리스트</span></a>
@@ -46,7 +46,12 @@
         <div class="p-4 my-3 bg-white rounded shadow-sm">
           <div class="text-center">
             <div class="avatar avatar-xl mb-3 mx-auto" style="background-image: url('../assets/img/profile.jpg');"></div>
-            <button type="button" class="btn btn-sm btn-outline-primary rounded-pill mb-3">사진 변경</button>
+
+            <div style="position: relative; overflow: hidden; display: inline-block;">
+              <button type="button" class="btn btn-sm btn-outline-primary rounded-pill mb-3">사진 변경</button>
+              <input type="file" style="font-size: 10rem; position: absolute; left: 0; top: 0; opacity: 0;" />
+            </div>
+
             <h5>홍길동</h5>
             <a href="#">linking.com/myUserName</a>
           </div>
