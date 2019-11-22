@@ -1,6 +1,7 @@
 <? header("Content-Type: text/html; charset=UTF-8");
 	include "./this_user.php";
 	$num = kiki_isnumb($_POST["num"]);	 
+//$num = 1;
 if(!$num or !$UserID) {	// 기본 값이 등록되지 않았다면
 	$prog = "false";
 	$msg = "기본 값이 등록되지 않았습니다.";
@@ -8,10 +9,11 @@ if(!$num or !$UserID) {	// 기본 값이 등록되지 않았다면
 	$SQL = "Select likeFlag, likedSerno from product_liked ";
 	$SQL .= " where boardSerno = $num ";
 	$SQL .= " and userId = '$UserID' ";
-	$result = mysqli_query($conn, $SQL);
+//echo $SQL;
+	$result = mysqli_query($kiki_conn, $SQL);
 	if ( $result === false ) {
 		die( print_r( mysqli_connect_error(), true));
-		mysqli_close($conn);
+		mysqli_close($kiki_conn);
 	} else {
 	  $row = mysqli_fetch_array($result, MYSQLI_ASSOC);
  	  $likeFlag = $row["likeFlag"];	
@@ -29,7 +31,7 @@ if(!$num or !$UserID) {	// 기본 값이 등록되지 않았다면
 		$SQL = "UPDATE product_liked SET likeFlag = '$re_flag' ";
 		$SQL .= ", LikeDate = now() ";	
 		$SQL .= " WHERE likedSerno = $likedSerno ";
-		$result = mysqli_query($conn, $SQL);
+		$result = mysqli_query($kiki_conn, $SQL);
 		if ( $result === false ) {
 		   die( print_r( mysqli_connect_error(), true));
 		}
@@ -39,7 +41,7 @@ if(!$num or !$UserID) {	// 기본 값이 등록되지 않았다면
 		$SQL .= "  values ($num ";
 		$SQL .= ", '$UserID'";
 		$SQL .= ", now() )" ;
-		$result = mysqli_query($conn, $SQL);
+		$result = mysqli_query($kiki_conn, $SQL);
 		if ( $result === false ) {
 		   die( print_r( mysqli_connect_error(), true));
 		}
@@ -48,6 +50,6 @@ if(!$num or !$UserID) {	// 기본 값이 등록되지 않았다면
 	$prog = "true";
 	$msg = "";
 }
-	mysqli_close($conn);
+	mysqli_close($kiki_conn);
 // 토론 등록 form append
 echo $_REQUEST["callback"]."({'prog':'". $prog ."','css' : '". $css ."','msg' : '". $msg ."' })";				?>	

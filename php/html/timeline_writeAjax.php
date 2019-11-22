@@ -72,7 +72,7 @@ $result_stmt .= " <div class='collapse' id='collapseReply$boardSerno'> ";
 $result_stmt .= "  <div class='form-group mt-3'> ";
 $result_stmt .= "   <textarea class='form-control' id='review_cont_$boardSerno' rows='2' placeholder='댓글 입력' style='resize: none;'></textarea> ";
 $result_stmt .= "  </div> ";
-$result_stmt .= "  <div class='text-right'><button type='button' onclick='GoWrite_review(\'$boardSerno\')' class='btn btn-sm btn-primary'>확인</button></div> ";
+$result_stmt .= "  <div class='text-right'><button type='button' onclick='GoWrite_review(\"$boardSerno\")' class='btn btn-sm btn-primary'>확인</button></div> ";
 $result_stmt .= " </div> ";
 $result_stmt .= " <div id='pro_con01_$boardSerno'> ";
 $result_stmt .= "  <!-- 댓글 넣기 --> ";

@@ -24,9 +24,10 @@ location.href = "./sign-in.php"
 
 	$SQL = "Select boardSerno, a.userid, username, title, productLink, image ";
 	$SQL .= ", imageurl, a.regYHS, reviewcnt, boardtext, price ";
-	$SQL .= ", (select count(likedSerno) from db_liked where a.boardSerno ";
+	$SQL .= ", (select count(likedSerno) from product_liked where a.boardSerno ";
 	$SQL .= " = boardSerno and userId ='$UserID' and likeFlag = '1') as likeSerno ";
-	$SQL .= " from $board a inner join db_user b where boardSerno = '$num' ";
+	$SQL .= " from db_product a inner join db_user b ON  a.userid = b.userid where boardSerno = '$num' ";
+//echo $SQL;
 	$result = mysqli_query($kiki_conn, $SQL);
 	if( $result === false) {
 	} else {
@@ -42,7 +43,7 @@ location.href = "./sign-in.php"
 		$image = $row["image"];
 		$image = stripslashes($image);
 IF ($image) {
-	if (substr($image,0,8) != "./assets") {
+	if (substr($image,0,9) != "../assets") {
 		$temp_name = explode('||',$image); 
 		$original_file_name = $temp_name[0];
 		$profileImg = "../data/profile/".$original_file_name;
@@ -55,7 +56,7 @@ IF ($image) {
 		$imageurl = $row["imageurl"];
 		$imageurl = stripslashes($imageurl);
 IF ($imageurl) {
-	if (substr($imageurl,0,8) != "./assets") {
+	if (substr($imageurl,0,9) != "../assets") {
 		$temp_name2 = explode('||',$imageurl); 
 		$original_file2 = $temp_name2[0];
 		$productimg = "../data/profile/".$original_file2;
@@ -111,7 +112,7 @@ IF ($imageurl) {
           <p><?=$title?></p>
 <?	IF ($imageurl) {	?>
           <div class="row align-items-center no-gutters mb-3">
-            <div class="col"><a href="#"><?=$?><img class="w-100" src="https://via.placeholder.com/640x480"></a></div>
+            <div class="col"><a href="#"><img class="w-100" src="<?=$productimg?>"></a></div>
           </div>
 <?	}	?>
           <p><?=$boardtext?></p>
@@ -126,7 +127,6 @@ IF ($imageurl) {
           <div class="d-flex justify-content-between mt-3">
             <p class="m-0">
               <button type="button" onclick="btn_liked('<?=$num?>')" class="btn btn-sm btn-light"><i id="liked_txt" class="<?=$liked_txt?>"></i></button>
-			  <button type="button" class="btn btn-sm btn-light"><i class="far fa-heart fa-lg"></i></button>
               <button type="button" class="btn btn-sm btn-light" data-toggle="collapse" href="#collapseReply" role="button" aria-expanded="false"><i class="fas fa-comment fa-lg"></i></button>
               <button type="button" class="btn btn-sm btn-light"><i class="fas fa-share-alt fa-lg"></i></button>
             </p>
@@ -140,11 +140,16 @@ IF ($imageurl) {
             <div class="text-right"><button onclick="GoWrite('<?=$num?>')" type="button" class="btn btn-sm btn-primary">확인</button></div>
 <?	}	?>
           </div>
-<!-- 상품 리뷰 시작	-->
-		  <div id="pro_con01">
 <?	$wheStr = "a.boardSerno = '$no'";
+	$pagesize = "5";
+	$cur_page = kiki_isnumb($_POST["cur_page"]) ;
+	if (!$cur_page) {
+		$cur_page = 1;
+	}
+
 	$SQL = "Select count(reviewSerno) as totcnt from product_review a";
 	$SQL .= " inner join db_user b ON a.userid = b.userid where $wheStr  ";
+//echo $SQL;
 	$result = mysqli_query($kiki_conn, $SQL);
 	if( $result === false) {
 		 die( print_r( mysqli_connect_error(), true) );
@@ -165,6 +170,9 @@ IF ($imageurl) {
 		$display = "";
 	}
 	mysqli_close($kiki_conn);	?>
+<!-- 상품 리뷰 시작	-->
+		  <div id="pro_con01">
+
 		  </div>
 <!-- 상품 리뷰 끝	-->
           <div id="more_page" style="display:<?=$display?>" class="text-right"><a href="javascript:kiki_list();"><small>댓글 더보기 <i class="fas fa-chevron-down"></i></small></a></div>
@@ -232,7 +240,7 @@ function GoWrite(num) {
 
 function remove_review(reviewSerno) {
 	$.ajax({
-        url: './product_review_removelikedAjax.php?callback=?',
+        url: './product_review_removeAjax.php?callback=?',
         type: 'POST',
 		data: {
 		  "reviewSerno": reviewSerno,

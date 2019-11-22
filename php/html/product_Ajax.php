@@ -33,7 +33,7 @@ $result_stmt .= "<div class='w-100 text-center text-muted py-5'> 자료가 없�
 
 		$SQL = "Select boardSerno, a.userid, username, title, image ";
 		$SQL .= ", imageurl, a.regYHS, reviewcnt, boardtext, price ";
-		$SQL .= ", (select count(likedSerno) from db_liked where a.boardSerno ";
+		$SQL .= ", (select count(likedSerno) from product_liked where a.boardSerno ";
 		$SQL .= " = boardSerno and userId ='$UserID' and likeFlag = '1') as likeSerno ";
 		$SQL .= " from $board a inner join db_user b ON a.userid = b.userid ";
 		$SQL .= " order by boardSerno desc limit $start, $pagesize ";
@@ -52,7 +52,7 @@ $result_stmt .= "<div class='w-100 text-center text-muted py-5'> 자료가 없�
 			$image = $row["image"];
 			$image = stripslashes($image);
 IF ($image) {
-	if (substr($image,0,8) != "./assets") {
+	if (substr($image,0,9) != "../assets") {
 		$temp_name = explode('||',$image); 
 		$original_file_name = $temp_name[0];
 		$profileImg = "../data/profile/".$original_file_name;
@@ -65,7 +65,7 @@ IF ($image) {
 			$imageurl = $row["imageurl"];
 			$imageurl = stripslashes($imageurl);
 IF ($imageurl) {
-	if (substr($imageurl,0,8) != "./assets") {
+	if (substr($imageurl,0,9) != "../assets") {
 		$temp_name2 = explode('||',$imageurl); 
 		$original_file2 = $temp_name2[0];
 		$productimg = "../data/profile/".$original_file2;
@@ -109,10 +109,10 @@ $result_stmt .= "  </div> ";
 $result_stmt .= " </div> ";
 	IF ($imageurl) {
 $result_stmt .= " <div class='row align-items-center no-gutters mb-3'> ";
-$result_stmt .= "  <a href='javascript:go_detail(\'$no\')'>$productimg</a> ";
+$result_stmt .= "  <a href='javascript:go_detail(\"$no\")'><img class='w-100' src='$productimg'></a> ";
 $result_stmt .= " </div> ";
 	}
-$result_stmt .= " <p>$boardtext <a href='javascript:go_detail(\'$no\')' class='ml-1'>더보기</a></p> ";
+$result_stmt .= " <p>$boardtext <a href='javascript:go_detail(\"$no\")' class='ml-1'>더보기</a></p> ";
 
 
 $result_stmt .= " <div class='d-flex justify-content-between mt-3'> ";
