@@ -2,6 +2,7 @@
 <html lang="ko">
 <?  
   include "./this_user.php";
+  include("pageInc.php");
   if (!$UserID ) {  ?>
 <script>
 //location.href = "./sign-in.php"
@@ -120,8 +121,18 @@
     $(function () {
       $('[data-toggle="popover"]').popover()
     })
+     function list(pagenum){
+        var reloadFrm = document.querySelector("#reloadFrm");
+        var pagenumInput = reloadFrm.querySelector("input[name='pagenum']");
+        pagenumInput.value=pagenum;
+        reloadFrm.submit();
+    }
 
   </script>
+    <form id="reloadFrm" action="./product-list.php">   
+      <input name="pagenum" style="display:none" value="<?=$pagenum?>"></input>
+       <input name="srchTxt" style="display:none" value="<?=$srchTxt?>"></input>
+    </form>
 </body>
 
 </html>
