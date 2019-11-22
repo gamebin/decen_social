@@ -1,6 +1,7 @@
-<?    $save_dir="assets/data/boardImg";
+<?    $save_dir="../data";
 //   $save_dir="C:\inetpub\wwwroot\moksa\PDS";
     
+    $folder1 = "product";
     //파일 업로드 함수
 function upload(&$file,$limit_file_size, $folder1)    {
     global $save_dir;

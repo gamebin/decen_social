@@ -74,7 +74,7 @@
             </thead>
             <tbody>
               <?while($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {?>
-              <tr>
+              <tr onclick="goProdPreview('<?=$row["boardSerno"]?>')" >
                 <td>
                   <div class="thumbnail mr-3 rounded" style="background-image: url('<?=$row["imageurl"]?>');"></div>
                 </td>
@@ -145,6 +145,15 @@
       reloadFrm.submit();
     }
     
+    function goProdPreview(serno){
+        var reloadFrm = document.querySelector("#reloadFrm");     
+        var input = document.createElement("input");
+        input.name = "boardSerno";
+        input.value = serno;
+        reloadFrm.appendChild(input);
+        reloadFrm.action = "product-preview.php";
+        reloadFrm.submit();
+     }
 
   </script>
     <form id="reloadFrm" action="./product-list.php">   

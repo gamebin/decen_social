@@ -5,7 +5,7 @@
   include("pageInc.php");
   if (!$UserID ) {  ?>
 <script>
-//location.href = "./sign-in.php"
+location.href = "./sign-in.php"
 </script>
 <?  }
 //  $filename = upload($_FILES['filename1'],50*1024*1024,'board');
