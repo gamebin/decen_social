@@ -1,6 +1,49 @@
 <!doctype html>
 <html lang="ko">
+<?  
+  include "./this_user.php";
+  include("pageInc.php");
+  if (!$UserID ) {  ?>
+<script>
+location.href = "./sign-in.php"
+</script>
+<?  }
+//  $filename = upload($_FILES['filename1'],50*1024*1024,'board');
 
+    $pagenum=1;
+     
+     
+    $srchType="";
+    $srchTxt ="";
+    $isSrch = false;
+    if(!empty($_REQUEST["pagenum"])){
+      $pagenum=$_REQUEST["pagenum"];
+    }  
+     $whereStatement = "";
+    if(!empty($_REQUEST["srchTxt"])){
+      if(strlen($_REQUEST["srchTxt"]) > 0){
+        $srchTxt =$_REQUEST["srchTxt"];
+        $whereStatement = " where (userid like '%$srchTxt%' or username like  '%$srchTxt%' )";
+        
+      }
+    }
+  
+    $pageDataAmt=4;
+    $bottom_page_block=5;
+    $endpg; 
+    $startblock=0;
+    if($pagenum > 1){
+        $startblock = (intval($pagenum) * $pageDataAmt) - $pageDataAmt;        
+    };
+
+    $cnt_query= "select count(*) as total from db_user ".$whereStatement;
+    $cnt_query_rst=  mysqli_query($kiki_conn, $cnt_query);
+    $cntrow = mysqli_fetch_array($cnt_query_rst, MYSQLI_ASSOC);
+    $endpg = ceil(intval($cntrow["total"])/$pageDataAmt);
+
+  $productSQL = "select * from db_user $whereStatement order by regYHS DESC limit $startblock, $pageDataAmt";
+  $result = mysqli_query($kiki_conn, $productSQL);
+?>
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -32,45 +75,22 @@
             </tr>
           </thead>
           <tbody>
+            <?while($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {?>
             <tr>
-              <td>idnfa</td>
-              <td>홍길동</td>
-              <td>inwov@naver.com</td>
-              <td>2019-10-10</td>
+              <td><?=$row["userid"]?></td>
+              <td><?=$row["username"]?></td>
+              <td><?=$row["email"]?></td>
+              <td><?=$row["regYHS"]?></td>
             </tr>
-            <tr>
-              <td>idnfa</td>
-              <td>홍길동</td>
-              <td>inwov@naver.com</td>
-              <td>2019-10-10</td>
-            </tr>
-            <tr>
-              <td>idnfa</td>
-              <td>홍길동</td>
-              <td>inwov@naver.com</td>
-              <td>2019-10-10</td>
-            </tr>
-            <tr>
-              <td>idnfa</td>
-              <td>홍길동</td>
-              <td>inwov@naver.com</td>
-              <td>2019-10-10</td>
-            </tr>
-
+            <?}?>
           </tbody>
         </table>
 
         <nav>
           <ul class="pagination justify-content-center text-light">
-            <li class="page-item">
-              <a class="page-link bg-secondary border-dark text-light" href="#" tabindex="-1" aria-disabled="true">이전</a>
-            </li>
-            <li class="page-item"><a class="page-link bg-secondary border-dark text-light" href="#">1</a></li>
-            <li class="page-item"><a class="page-link bg-secondary border-dark text-light" href="#">2</a></li>
-            <li class="page-item"><a class="page-link bg-secondary border-dark text-light" href="#">3</a></li>
-            <li class="page-item">
-              <a class="page-link bg-secondary border-dark text-light" href="#">다음</a>
-            </li>
+              <?php
+               echo(get_page_nums($pagenum,$endpg,$bottom_page_block));
+              ?>
           </ul>
         </nav>
 
@@ -101,8 +121,18 @@
     $(function () {
       $('[data-toggle="popover"]').popover()
     })
+     function list(pagenum){
+        var reloadFrm = document.querySelector("#reloadFrm");
+        var pagenumInput = reloadFrm.querySelector("input[name='pagenum']");
+        pagenumInput.value=pagenum;
+        reloadFrm.submit();
+    }
 
   </script>
+    <form id="reloadFrm" action="./product-list.php">   
+      <input name="pagenum" style="display:none" value="<?=$pagenum?>"></input>
+       <input name="srchTxt" style="display:none" value="<?=$srchTxt?>"></input>
+    </form>
 </body>
 
 </html>

@@ -3,7 +3,7 @@
   include "./this_user.php";
   if (!$UserID ) {  ?>
 <script>
-//location.href = "./sign-in.php"
+location.href = "./sign-in.php"
 </script>
 <?  }
 //  $filename = upload($_FILES['filename1'],50*1024*1024,'board');
@@ -31,6 +31,7 @@
 
 
     <form id="addProdFrm" action="reg-prod.php">
+      <input type="text" name="userid" value="<?=$UserID?>" style="display:none"></input>
       <div class="form-group row">
         <label for="" class="col-sm-2 col-form-label">상품명</label>
         <div class="col-sm-10">
