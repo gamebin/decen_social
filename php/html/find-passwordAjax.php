@@ -74,8 +74,8 @@ if(!$chk_UserID) {		//'같은 이메일이 없다면
 
 //'''''''''' 메일 보내기
 
-  $message .="   <div> Linking 임시 비밀번호 : $new_passwd </div> ";
-  $message .="   <a href='http://linking.kr/php/html/sign-in.php' style='display:block; text-align:center' target=_blank>Linking 로그인</a>";
+  $message .="   <div> 임시 비밀번호 : $new_passwd </div> ";
+  $message .="   <a href='login.php' style='display:block; text-align:center' target=_blank>로그인</a>";
 
   $result = send_htmlmail('master@linking.kr', '관리자', $email, "회원님", '임시비밀번호 전송', $message);
 //''' 가입 메일 보내기 끝났습니다.
