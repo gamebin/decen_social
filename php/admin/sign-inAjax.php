@@ -15,8 +15,8 @@ if ($passwd <> "") {
 }
 
 if ($UserID <> "" and $passwd <> "" ) {
-	$SQL = "select userid, userpasswd from db_user ";
-	$SQL .= " where userid = '$UserID' and gubun = '9' and delFlag = 'N'";
+	$SQL = "select adminId, passwd from db_user ";
+	$SQL .= " where adminId = '$UserID'";
 	$result = mysqli_query($kiki_conn, $SQL);
 	if( $result === false) {
 		 die( print_r( mysqli_connect_error(), true) );
@@ -24,8 +24,8 @@ if ($UserID <> "" and $passwd <> "" ) {
 		$msg = "오류 입니다. ";
 	} else {
 		$row = mysqli_fetch_array($result, MYSQLI_ASSOC);
-		$now_UserId = $row["userid"];
-		$now_userpasswd = $row["userpasswd"];
+		$now_UserId = $row["adminId"];
+		$now_userpasswd = $row["passwd"];
 		mysqli_free_result($result);
 
 		if($UserID <> trim($now_UserId)) {

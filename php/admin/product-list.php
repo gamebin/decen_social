@@ -4,7 +4,7 @@
   include("pageInc.php");
   if (!$UserID ) {  ?>
 <script>
-//location.href = "./sign-in.php"
+location.href = "./sign-in.php"
 </script>
 <?  }
     $pagenum=1;

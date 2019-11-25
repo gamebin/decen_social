@@ -13,10 +13,10 @@
           <a class="nav-link" href="product-list.php">상품 리스트</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">상품 클릭 현황</a>
+          <a class="nav-link" href="product-clicks.php">상품 클릭 현황</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">인스턴스 정보</a>
+          <a class="nav-link" href="Instance-info.php">인스턴스 정보</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="#">상품 리스트</a>
@@ -24,9 +24,9 @@
       </ul>
       <form class="form-inline my-2 my-lg-0 ml-lg-auto">
         <div class="input-group">
-          <input type="text" class="form-control" placeholder="검색">
+          <input id="srchTxt" type="text" class="form-control" placeholder="검색">
           <div class="input-group-append">
-            <button class="btn btn-outline-secondary" type="button" id="button-addon2"><i class="fas fa-search"></i></button>
+            <button onclick="doSearch()" class="btn btn-outline-secondary" type="button" id="button-addon2"><i class="fas fa-search"></i></button>
           </div>
         </div>
       </form>

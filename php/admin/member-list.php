@@ -128,6 +128,22 @@ location.href = "./sign-in.php"
         reloadFrm.submit();
     }
 
+    function doSearch(){
+      var srchTxt = document.querySelector("#srchTxt").value;
+      
+      if(srchTxt.length < 1){
+        alert("검색어를 입력해주세요");
+        return
+      }
+     
+      
+      document.querySelector("#reloadFrm > input[name='srchTxt']").value = srchTxt;
+      var reloadFrm = document.querySelector("#reloadFrm");
+      var pagenumInput = reloadFrm.querySelector("input[name='pagenum']");
+          pagenumInput.value=0;
+      reloadFrm.submit();
+    }
+
   </script>
     <form id="reloadFrm" action="./member-list.php">   
       <input name="pagenum" style="display:none" value="<?=$pagenum?>"></input>
