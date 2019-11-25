@@ -1,9 +1,43 @@
 <!doctype html>
-<html lang="ko">
 <?  
-  $boardSerno = $_REQUEST["boardSerno"];
+  include "./this_user.php";
+  include("pageInc.php");
+  if (!$UserID ) {  ?>
+<script>
+//location.href = "./sign-in.php"
+</script>
+<?  }
+    $pagenum=1;
+     
+     
+    $srchType="";
+    $srchTxt ="";
+    $isSrch = false;
+    if(!empty($_REQUEST["pagenum"])){
+      $pagenum=$_REQUEST["pagenum"];
+    }  
+     $whereStatement = "";
+    if(!empty($_REQUEST["srchTxt"])){
+      if(strlen($_REQUEST["srchTxt"]) > 0){
+        $srchTxt =$_REQUEST["srchTxt"];
+        $whereStatement = " where (title like '%$srchTxt%')";
+        
+      }
+    }
+    $pageDataAmt=4;
+    $bottom_page_block=5;
+    $endpg; 
+    $startblock=0;
+    if($pagenum > 1){
+        $startblock = (intval($pagenum) * $pageDataAmt) - $pageDataAmt;        
+    };
 
-  $productSQL = "select * from db_product where boardSerno = '$boardSerno'";
+    $cnt_query= "select count(*) as total from db_product ".$whereStatement;
+    $cnt_query_rst=  mysqli_query($kiki_conn, $cnt_query);
+    $cntrow = mysqli_fetch_array($cnt_query_rst, MYSQLI_ASSOC);
+    $endpg = ceil(intval($cntrow["total"])/$pageDataAmt);
+
+  $productSQL = "select * from db_product $whereStatement order by clickcnt DESC limit $startblock, $pageDataAmt";
   $result = mysqli_query($kiki_conn, $productSQL);
 ?>
 <head>
@@ -17,57 +51,8 @@
 </head>
 
 <body class="bg-dark text-light">
-  <nav class="navbar navbar-expand-lg fixed-top navbar-dark bg-primary shadow-sm" style="background: linear-gradient(135deg, #222 0%, #343a40 100%);">
-    <a class="navbar-brand mr-auto mr-lg-3" href="#"><img src="../assets/img/logo-light.svg" style="height: 2rem;"></a>
-    <button class="navbar-toggler p-0 border-0" type="button" data-toggle="offcanvas">
-      <span class="navbar-toggler-icon"></span>
-    </button>
+  <? include "./inc/header.php";?>
 
-    <div class="navbar-collapse offcanvas-collapse" id="navbarsExampleDefault">
-      <ul class="navbar-nav">
-        <li class="nav-item">
-          <a class="nav-link" href="#">회원 리스트</a>
-        </li>
-        <li class="nav-item active">
-          <a class="nav-link" href="#">상품 리스트</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">상품 클릭 현황</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">인스턴스 정보</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">상품 리스트</a>
-        </li>
-      </ul>
-      <form class="form-inline my-2 my-lg-0 ml-lg-auto">
-        <div class="input-group">
-          <input type="text" class="form-control" placeholder="검색">
-          <div class="input-group-append">
-            <button class="btn btn-outline-secondary" type="button" id="button-addon2"><i class="fas fa-search"></i></button>
-          </div>
-        </div>
-      </form>
-    </div>
-  </nav>
-
-  <div class="nav-scroller bg-secondary navbar-dark shadow">
-    <nav class="nav nav-underline">
-      <a class="nav-link active text-light" href="#">Dashboard</a>
-      <a class="nav-link text-light" href="#">
-        Friends
-        <span class="badge badge-pill bg-light align-text-bottom text-secondary">27</span>
-      </a>
-      <a class="nav-link text-light" href="#">Explore</a>
-      <a class="nav-link text-light" href="#">Suggestions</a>
-      <a class="nav-link text-light" href="#">Link</a>
-      <a class="nav-link text-light" href="#">Link</a>
-      <a class="nav-link text-light" href="#">Link</a>
-      <a class="nav-link text-light" href="#">Link</a>
-      <a class="nav-link text-light" href="#">Link</a>
-    </nav>
-  </div>
 
   <main role="main" class="container">
 
@@ -86,58 +71,27 @@
                 <th scope="col">클릭수</th>
               </tr>
             </thead>
-            <tbody>
-              <tr>
+            <tbody>          
+              <?while($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {?>
+              <tr onclick="goProdPreview('<?=$row["boardSerno"]?>')" >
                 <td>
-                  <div class="thumbnail mr-3 rounded" style="background-image: url('../assets/img/bg-default01.jpg');"></div>
+                  <div class="thumbnail mr-3 rounded" style="background-image: url('../data/product/<?=$row["imageurl"]?>');"></div>
                 </td>
-                <td>상품이름</td>
-                <td>20,000원</td>
-                <td>2019-10-10</td>
-                <td>73,568,578회</td>
+                <td><?=$row["title"]?></td>
+                <td><?=$row["price"]?> 원</td>
+                <td><?=$row["regYHS"]?></td>
+                <td><?=$row["clickcnt"]?>회</td>
               </tr>
-              <tr>
-                <td>
-                  <div class="thumbnail mr-3 rounded" style="background-image: url('../assets/img/bg-default01.jpg');"></div>
-                </td>
-                <td>상품이름</td>
-                <td>20,000원</td>
-                <td>2019-10-10</td>
-                <td>73,568,578회</td>
-              </tr>
-              <tr>
-                <td>
-                  <div class="thumbnail mr-3 rounded" style="background-image: url('../assets/img/bg-default01.jpg');"></div>
-                </td>
-                <td>상품이름</td>
-                <td>20,000원</td>
-                <td>2019-10-10</td>
-                <td>73,568,578회</td>
-              </tr>
-              <tr>
-                <td>
-                  <div class="thumbnail mr-3 rounded" style="background-image: url('../assets/img/bg-default01.jpg');"></div>
-                </td>
-                <td>상품이름</td>
-                <td>20,000원</td>
-                <td>2019-10-10</td>
-                <td>73,568,578회</td>
-              </tr>
+              <?}?>
             </tbody>
           </table>
         </div>
 
         <nav>
           <ul class="pagination justify-content-center text-light">
-            <li class="page-item">
-              <a class="page-link bg-secondary border-dark text-light" href="#" tabindex="-1" aria-disabled="true">이전</a>
-            </li>
-            <li class="page-item"><a class="page-link bg-secondary border-dark text-light" href="#">1</a></li>
-            <li class="page-item"><a class="page-link bg-secondary border-dark text-light" href="#">2</a></li>
-            <li class="page-item"><a class="page-link bg-secondary border-dark text-light" href="#">3</a></li>
-            <li class="page-item">
-              <a class="page-link bg-secondary border-dark text-light" href="#">다음</a>
-            </li>
+             <?php
+               echo(get_page_nums($pagenum,$endpg,$bottom_page_block));
+              ?>
           </ul>
         </nav>
 
@@ -159,13 +113,51 @@
       $('[data-toggle="offcanvas"]').on('click', function () {
         $('.offcanvas-collapse').toggleClass('open')
       })
+        $(".navbar-nav .nav-item .nav-link").eq(2).addClass("active");
+      
     })
 
     $(function () {
       $('[data-toggle="popover"]').popover()
     })
 
+     function list(pagenum){
+        var reloadFrm = document.querySelector("#reloadFrm");
+        var pagenumInput = reloadFrm.querySelector("input[name='pagenum']");
+        pagenumInput.value=pagenum;
+        reloadFrm.submit();
+    }
+    function doSearch(){
+      var srchTxt = document.querySelector("#srchTxt").value;
+      
+      if(srchTxt.length < 1){
+        alert("검색어를 입력해주세요");
+        return
+      }
+     
+      
+      document.querySelector("#reloadFrm > input[name='srchTxt']").value = srchTxt;
+      var reloadFrm = document.querySelector("#reloadFrm");
+      var pagenumInput = reloadFrm.querySelector("input[name='pagenum']");
+          pagenumInput.value=0;
+      reloadFrm.submit();
+    }
+    
+    function goProdPreview(serno){
+        var reloadFrm = document.querySelector("#reloadFrm");     
+        var input = document.createElement("input");
+        input.name = "boardSerno";
+        input.value = serno;
+        reloadFrm.appendChild(input);
+        reloadFrm.action = "product-preview.php";
+        reloadFrm.submit();
+     }
+
   </script>
+    <form id="reloadFrm" action="./product-clicks.php">   
+      <input name="pagenum" style="display:none" value="<?=$pagenum?>"></input>
+       <input name="srchTxt" style="display:none" value="<?=$srchTxt?>"></input>
+    </form>
 </body>
 
 </html>
