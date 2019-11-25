@@ -31,7 +31,7 @@
 
     <div class="row">
       <div class="col-lg-6">
-        <img class="img-fluid mb-3" src="https://via.placeholder.com/640x480">
+        <img class="img-fluid mb-3" style="width:540px;height:480px" src="../data/product/<?=$row["imageurl"]?>">
       </div>
       <div class="col-lg-6">
         <div class="table-responsive">
@@ -56,6 +56,7 @@
     </div>
     <h5 class="mb-3">상세 설명</h5>
     <?=$row["boardtext"]?>
+    <p class="text-right"><a href="#" onclick="goMod()" class="btn btn-secondary">수정</a></p> 
   </main>
   <footer>
     <p class="mt-5 mb-0 p-3 text-secondary border-top border-secondary">© 2019</p>
@@ -75,7 +76,20 @@
       $('[data-toggle="popover"]').popover()
     })
 
+    function goMod(){
+      window.modFrm.submit();
+    }
+
   </script>
+  <form name="modFrm" action="product-add.php">
+      <input name="isEdit" value="Y" style="display: none"></input>
+      <input name="title" value="<?=$row["title"]?>" style="display: none"></input>
+      <input name="boardSerno" value="<?=$row["boardSerno"]?>" style="display: none"></input>
+      <input name="price" value="<?=$row["price"]?>" style="display: none"></input>
+      <input name="boardtext" value="<?=$row["boardtext"]?>" style="display: none"></input>
+      <input name="productLink" value="<?=$row["productLink"]?>" style="display: none"></input>
+        <input name="imageurl" value="<?=$row["imageurl"]?>" style="display: none"></input>
+  </form>
 </body>
 
 </html>

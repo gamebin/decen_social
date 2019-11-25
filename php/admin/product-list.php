@@ -76,7 +76,7 @@
               <?while($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {?>
               <tr onclick="goProdPreview('<?=$row["boardSerno"]?>')" >
                 <td>
-                  <div class="thumbnail mr-3 rounded" style="background-image: url('<?=$row["imageurl"]?>');"></div>
+                  <div class="thumbnail mr-3 rounded" style="background-image: url('../data/product/<?=$row["imageurl"]?>');"></div>
                 </td>
                 <td><?=$row["title"]?></td>
                 <td><?=$row["price"]?> 원</td>

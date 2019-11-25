@@ -129,7 +129,7 @@ location.href = "./sign-in.php"
     }
 
   </script>
-    <form id="reloadFrm" action="./product-list.php">   
+    <form id="reloadFrm" action="./member-list.php">   
       <input name="pagenum" style="display:none" value="<?=$pagenum?>"></input>
        <input name="srchTxt" style="display:none" value="<?=$srchTxt?>"></input>
     </form>
