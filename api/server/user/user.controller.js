@@ -1,10 +1,13 @@
+const httpStatus = require('http-status');
+const APIError = require('../helpers/APIError');
 const User = require('./user.model');
 
 /**
  * Load user and append to req.
  */
 function load(req, res, next, id) {
-  User.get(id)
+  console.debug('user.controller.load.id:', id);
+  User.getUserInfoBySerno(id)
     .then((user) => {
       req.user = user; // eslint-disable-line no-param-reassign
       return next();
@@ -22,48 +25,61 @@ function get(req, res) {
 
 /**
  * Create new user
+ * @property {string} req.body.userid - The userid of user.
  * @property {string} req.body.username - The username of user.
- * @property {string} req.body.mobileNumber - The mobileNumber of user.
+ * @property {string} req.body.userpasswd - The userpasswd of user.
+ * @property {string} req.body.email - The email of user.
  * @returns {User}
  */
-function create(req, res, next) {
-  const user = new User({
-    username: req.body.username,
-    mobileNumber: req.body.mobileNumber
-  });
+async function create(req, res, next) {
+  let encryptPasswd = await genPW(req.body.userpasswd);
+  let userIp = getUserIP(req);
+  let userData = {
+    userid     : req.body.userid,
+    username   : req.body.username,
+    userpasswd : encryptPasswd,
+    email      : req.body.email || '0',
+    regYHS     : new Date(),
+    userIp     : userIp
+  };
 
-  user.save()
-    .then(savedUser => res.json(savedUser))
-    .catch(e => next(e));
+  User.getUserInfoByUserId(req.body.userid)
+    .then(userInfo => {
+      if (userInfo != null) {
+        const err = new APIError('Authentication error', httpStatus.UNAUTHORIZED, true);
+        console.debug('err:', err);
+        return next(err);
+      } else {
+        User.createUser(userData)
+          .then(savedUser => res.json(savedUser))
+          .catch(e => next(e));
+      }
+    })
+    .catch(e => { console.error(e); next(e) });
 }
 
 /**
  * Update existing user
+ * @property {string} req.body.userid - The userid of user.
  * @property {string} req.body.username - The username of user.
- * @property {string} req.body.mobileNumber - The mobileNumber of user.
+ * @property {string} req.body.userpasswd - The userpasswd of user.
+ * @property {string} req.body.email - The email of user.
  * @returns {User}
  */
-function update(req, res, next) {
+async function update(req, res, next) {
   const user = req.user;
-  user.username = req.body.username;
-  user.mobileNumber = req.body.mobileNumber;
+  let encryptPasswd = req.body.userpasswd ? await genPW(req.body.userpasswd) : user.userpasswd;
+  let userData = {
+    userserno  : user.userserno,
+    userid     : req.body.userid || user.userid,
+    username   : req.body.username || user.username,
+    userpasswd : encryptPasswd,
+    email      : req.body.email || user.email
+  };
 
-  user.save()
+  User.updateUser(userData)
     .then(savedUser => res.json(savedUser))
-    .catch(e => next(e));
-}
-
-/**
- * Get user list.
- * @property {number} req.query.skip - Number of users to be skipped.
- * @property {number} req.query.limit - Limit number of users to be returned.
- * @returns {User[]}
- */
-function list(req, res, next) {
-  const { limit = 50, skip = 0 } = req.query;
-  User.list({ limit, skip })
-    .then(users => res.json(users))
-    .catch(e => next(e));
+    .catch(e => { console.error(e); next(e) });
 }
 
 /**
@@ -77,4 +93,37 @@ function remove(req, res, next) {
     .catch(e => next(e));
 }
 
-module.exports = { load, get, create, update, list, remove };
+function genPW(passwd) {
+  const crypto = require('crypto');
+  return crypto
+    .createHash('sha256')
+    .update(passwd)
+    .digest('base64');
+}
+
+function getUserIP(req) {
+  let ipAddress;
+
+  if (!!req.hasOwnProperty('sessionID')) {
+    ipAddress = req.headers['x-forwarded-for'];
+  } else {
+    if (!ipAddress) {
+      let forwardedIpsStr = req.header('x-forwarded-for');
+
+      if (forwardedIpsStr) {
+        let forwardedIps = forwardedIpsStr.split(',');
+        ipAddress = forwardedIps[0];
+      }
+      if (!ipAddress) {
+        ipAddress = req.connection.remoteAddress;
+      }
+    }
+  }
+
+  let idxColon = ipAddress.lastIndexOf(':');
+  let rtnValue = ipAddress.substring(idxColon + 1, ipAddress.length);
+  console.debug(rtnValue);
+  return rtnValue;
+}
+
+module.exports = { load, get, create, update, genPW, getUserIP };

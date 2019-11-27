@@ -2,29 +2,31 @@ const Joi = require('joi');
 
 module.exports = {
   // POST /api/users
-  createUser: {
-    body: {
-      username: Joi.string().required(),
-      mobileNumber: Joi.string().regex(/^[1-9][0-9]{9}$/).required()
+  createUser : {
+    body : {
+      userid     : Joi.string().required(),
+      username   : Joi.string().required(),
+      userpasswd : Joi.string().required(),
+      email      : Joi.string()
     }
   },
 
   // UPDATE /api/users/:userId
-  updateUser: {
-    body: {
-      username: Joi.string().required(),
-      mobileNumber: Joi.string().regex(/^[1-9][0-9]{9}$/).required()
+  updateUser : {
+    body : {
+      userid     : Joi.string().required(),
+      username   : Joi.string().required(),
+      userpasswd : Joi.string().required(),
+      email      : Joi.string()
     },
-    params: {
-      userId: Joi.string().hex().required()
-    }
+    params : { userId: Joi.string().required() }
   },
 
   // POST /api/auth/login
-  login: {
-    body: {
-      username: Joi.string().required(),
-      password: Joi.string().required()
+  login : {
+    body : {
+      userid     : Joi.string().required(),
+      userpasswd : Joi.string().required()
     }
   }
 };

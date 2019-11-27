@@ -10,40 +10,61 @@ chai.config.includeStack = true;
 
 describe('## Auth APIs', () => {
   const validUserCredentials = {
-    username: 'react',
-    password: 'express'
+    userid     : 'gamekiki',
+    userpasswd : 'gamekiki@password',
+    username   : 'gamekiki name',
+    email      : 'gamekiki@gamekiki.com'
   };
 
   const invalidUserCredentials = {
-    username: 'react',
-    password: 'IDontKnow'
+    userid     : 'gamekiki',
+    userpasswd : 'gamekiki@'
   };
 
   let jwtToken;
 
+  describe('# POST /api/auth/signup', () => {
+    it.skip('should return create success code', done => {
+      request(app)
+        .post('/api/auth/signup')
+        .send(validUserCredentials)
+        .expect(httpStatus.OK)
+        // .then(res => {
+        //   expect(res.body).to.have.property('token');
+        //   jwt.verify(res.body.token, config.jwtSecret, (err, decoded) => {
+        //     expect(err).to.not.be.ok; // eslint-disable-line no-unused-expressions
+        //     expect(decoded.username).to.equal(validUserCredentials.username);
+        //     jwtToken = `Bearer ${res.body.token}`;
+        //     done();
+        //   });
+        // })
+        .catch(done);
+    });
+  });
+
   describe('# POST /api/auth/login', () => {
-    it('should return Authentication error', (done) => {
+    it('should return Authentication error', done => {
       request(app)
         .post('/api/auth/login')
         .send(invalidUserCredentials)
         .expect(httpStatus.UNAUTHORIZED)
-        .then((res) => {
+        .then(res => {
           expect(res.body.message).to.equal('Authentication error');
           done();
         })
         .catch(done);
     });
 
-    it('should get valid JWT token', (done) => {
+    it('should get valid JWT token', done => {
       request(app)
         .post('/api/auth/login')
         .send(validUserCredentials)
         .expect(httpStatus.OK)
-        .then((res) => {
+        .then(res => {
           expect(res.body).to.have.property('token');
           jwt.verify(res.body.token, config.jwtSecret, (err, decoded) => {
             expect(err).to.not.be.ok; // eslint-disable-line no-unused-expressions
-            expect(decoded.username).to.equal(validUserCredentials.username);
+            expect(decoded.userid).to.equal(validUserCredentials.userid);
             jwtToken = `Bearer ${res.body.token}`;
             done();
           });
@@ -53,35 +74,35 @@ describe('## Auth APIs', () => {
   });
 
   describe('# GET /api/auth/random-number', () => {
-    it('should fail to get random number because of missing Authorization', (done) => {
+    it('should fail to get random number because of missing Authorization', done => {
       request(app)
         .get('/api/auth/random-number')
         .expect(httpStatus.UNAUTHORIZED)
-        .then((res) => {
+        .then(res => {
           expect(res.body.message).to.equal('Unauthorized');
           done();
         })
         .catch(done);
     });
 
-    it('should fail to get random number because of wrong token', (done) => {
+    it('should fail to get random number because of wrong token', done => {
       request(app)
         .get('/api/auth/random-number')
         .set('Authorization', 'Bearer inValidToken')
         .expect(httpStatus.UNAUTHORIZED)
-        .then((res) => {
+        .then(res => {
           expect(res.body.message).to.equal('Unauthorized');
           done();
         })
         .catch(done);
     });
 
-    it('should get a random number', (done) => {
+    it('should get a random number', done => {
       request(app)
         .get('/api/auth/random-number')
         .set('Authorization', jwtToken)
         .expect(httpStatus.OK)
-        .then((res) => {
+        .then(res => {
           expect(res.body.num).to.be.a('number');
           done();
         })
