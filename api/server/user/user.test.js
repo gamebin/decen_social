@@ -95,7 +95,7 @@ describe('## User APIs', () => {
     });
   });
 
-  describe('# PUT /api/users/:userId', () => {
+  describe.('# PUT /api/users/:userId', () => {
     it('should update user details', (done) => {
       userData.username = 'KK789';
       console.debug('userData:', userData);
