@@ -41,7 +41,7 @@ describe('## Auth APIs', () => {
           // });
         })
         .catch(done);
-    });
+    }).timeout(10000);
   });
 
   describe('# POST /api/auth/login', () => {

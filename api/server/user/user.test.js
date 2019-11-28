@@ -106,7 +106,7 @@ describe('## User APIs', () => {
             .catch(done);
         })
         .catch(done);
-    });
+    }).timeout(10000);
 
     it('should report error with message - Not found, when user does not exists', (done) => {
       request(app)
@@ -143,7 +143,7 @@ describe('## User APIs', () => {
             .catch(done);
         })
         .catch(done);
-    });
+    }).timeout(10000);
   });
 
   describe('# DELETE /api/users/', () => {
@@ -167,6 +167,6 @@ describe('## User APIs', () => {
             .catch(done);
         })
         .catch(done);
-    });
+    }).timeout(10000);
   });
 });
