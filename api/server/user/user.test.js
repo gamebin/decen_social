@@ -43,7 +43,7 @@ after((done) => {
 });
 
 describe('## User APIs', () => {
-  describe('# POST /api/users', () => {
+  describe.skip('# POST /api/users', () => {
     it.skip('should create a new user', (done) => {
       request(app)
         .post('/api/users')
@@ -95,7 +95,7 @@ describe('## User APIs', () => {
     });
   });
 
-  describe.('# PUT /api/users/:userId', () => {
+  describe.skip('# PUT /api/users/:userId', () => {
     it('should update user details', (done) => {
       userData.username = 'KK789';
       console.debug('userData:', userData);
