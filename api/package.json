@@ -86,7 +86,7 @@
     "jsdiff": "^1.1.1",
     "lodash": "^4.17.15",
     "merge": "^1.2.1",
-    "mocha": "^5.0.0",
+    "mocha": "^6.0.0",
     "node-growl": "^0.1.1",
     "parsejson": "0.0.3",
     "supertest": "3.0.0",
