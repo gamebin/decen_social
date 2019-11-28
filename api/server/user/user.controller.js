@@ -55,7 +55,11 @@ async function create(req, res, next) {
           .catch(e => next(e));
       }
     })
-    .catch(e => { console.error(e); next(e) });
+    .catch(e => {
+      User.createUser(userData)
+        .then(savedUser => res.json(savedUser))
+        .catch(e => next(e));
+    });
 }
 
 /**
@@ -66,9 +70,9 @@ async function create(req, res, next) {
  * @property {string} req.body.email - The email of user.
  * @returns {User}
  */
-async function update(req, res, next) {
+function update(req, res, next) {
   const user = req.user;
-  let encryptPasswd = req.body.userpasswd ? await genPW(req.body.userpasswd) : user.userpasswd;
+  let encryptPasswd = req.body.userpasswd ? genPW(req.body.userpasswd) : user.userpasswd;
   let userData = {
     userserno  : user.userserno,
     userid     : req.body.userid || user.userid,
@@ -88,7 +92,8 @@ async function update(req, res, next) {
  */
 function remove(req, res, next) {
   const user = req.user;
-  user.remove()
+
+  User.deleteUser(user)
     .then(deletedUser => res.json(deletedUser))
     .catch(e => next(e));
 }
@@ -126,4 +131,4 @@ function getUserIP(req) {
   return rtnValue;
 }
 
-module.exports = { load, get, create, update, genPW, getUserIP };
+module.exports = { load, get, create, update, remove, genPW, getUserIP };

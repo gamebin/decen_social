@@ -15,15 +15,14 @@ const User = require('../user/user.model');
 async function login(req, res, next) {
   const userData = await User.getUserInfoByUserId(req.body.userid);
 
-  // Ideally you'll fetch this from the db
-  // Idea here was to show how jwt works with simplicity
+  // console.debug('req.body.user:', req.body.userid, ' userData.userid:', userData.userid);
+  // console.debug('userCtrl.genPW(req.body.userpasswd):', userCtrl.genPW(req.body.userpasswd), ' userData.userpasswd:', userData.userpasswd);
   if (req.body.userid === userData.userid && userCtrl.genPW(req.body.userpasswd) === userData.userpasswd) {
     const token = jwt.sign({ userid: userData.userid }, config.jwtSecret);
     return res.json({
       token,
       userserno : userData.userserno,
-      userid    : userData.userid,
-      username  : userData.username
+      userid    : userData.userid
     });
   }
 

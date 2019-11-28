@@ -4,31 +4,40 @@ const httpStatus = require('http-status');
 const chai = require('chai'); // eslint-disable-line import/newline-after-import
 const expect = chai.expect;
 const app = require('../../index');
+const faker = require('faker/locale/en');
+
+let fake_userid = faker.internet.userName().substr(0, 10);
+let fake_username = faker.name.findName().substr(0, 10);
+let fake_userpasswd = pad(faker.random.number(1000000, 9999999, 0), 4, 0)
+
+function pad(n, width, z) {
+  z = z || '0';
+  n = n + '';
+  return n.length >= width ? n : new Array(width - n.length + 1).join(z) + n;
+}
 
 chai.config.includeStack = true;
 
 let userData = {
-  token      : '',
-  userserno  : '',
-  userid     : 'kk123',
-  username   : 'KK123',
-  userpasswd : '1234567890'
+  userid     : 'gamekiki',
+  username   : 'gamekiki name',
+  userpasswd : 'gamekiki@password'
 };
 
 beforeEach(async () => {
-  const reqData = { userid: userData.userid, userpasswd: userData.userpasswd };
-  const headers = {};
-  const res = await request(app)
-    .post('/api/auth/login')
-    .set(headers)
-    .send(reqData);
+  // const reqData = { userid: 'gamekiki', username: 'gamekiki name', userpasswd: 'gamekiki@password' };
+  // const headers = {};
+  // const res = await request(app)
+  //   .post('/api/auth/login')
+  //   .set(headers)
+  //   .send(reqData);
 
-  // console.debug('res.body:', res.body);
-  userData.token = res.body.token;
-  userData.userserno = res.body.userserno;
-  userData.userid = res.body.userid;
-  userData.username = res.body.username;
-  // console.debug('userData:', userData);
+  // // console.debug('res.body:', res.body);
+  // userData.token = res.body.token;
+  // userData.userserno = res.body.userserno;
+  // userData.userid = res.body.userid;
+  // userData.username = res.body.username;
+  // // console.debug('userData:', userData);
 });
 
 /**
@@ -44,7 +53,10 @@ after((done) => {
 
 describe('## User APIs', () => {
   describe.skip('# POST /api/users', () => {
-    it.skip('should create a new user', (done) => {
+    it('should create a new user', (done) => {
+      userData.userid = fake_userid;
+      userData.username = fake_username;
+      // userData.userpasswd = fake_userpasswd;
       request(app)
         .post('/api/users')
         .send(userData)
@@ -58,6 +70,9 @@ describe('## User APIs', () => {
     });
 
     it('should create a auth error', (done) => {
+      userData.userid = 'gamekiki';
+      userData.username = fake_username;
+      // userData.userpasswd = fake_userpasswd;
       request(app)
         .post('/api/users')
         .send(userData)
@@ -72,13 +87,23 @@ describe('## User APIs', () => {
 
   describe('# GET /api/users/:userId', () => {
     it('should get user details', (done) => {
-      // console.debug('userData:', userData);
+      userData.userid = 'gamekiki';
+      userData.username = 'gamekiki name';
+      userData.userpasswd = 'gamekiki@password';
       request(app)
-        .get(`/api/users/${userData.userserno}`)
-        .expect(httpStatus.OK)
+        .post('/api/auth/login')
+        .send(userData)
         .then((res) => {
-          expect(res.body.username).to.equal(userData.username);
-          done();
+          userData.userserno = res.body.userserno;
+          console.debug('userData:', userData);
+          request(app)
+            .get(`/api/users/${userData.userserno}`)
+            .expect(httpStatus.OK)
+            .then((res) => {
+              // expect(res.body.username).to.equal(userData.username);
+              done();
+            })
+            .catch(done);
         })
         .catch(done);
     });
@@ -95,57 +120,51 @@ describe('## User APIs', () => {
     });
   });
 
-  describe.skip('# PUT /api/users/:userId', () => {
+  describe('# PUT /api/users/:userId', () => {
     it('should update user details', (done) => {
-      userData.username = 'KK789';
-      console.debug('userData:', userData);
+      userData.userid = 'gamekiki';
+      userData.username = 'gamekiki name';
+      userData.userpasswd = 'gamekiki@password';
       request(app)
-        .put(`/api/users/${userData.userserno}`)
+        .post('/api/auth/login')
         .send(userData)
-        .expect(httpStatus.OK)
         .then((res) => {
-          console.debug('res.body:', res.body);
-          // expect(res.body.username).to.equal('KK789');
-          done();
+          userData.userserno = res.body.userserno;
+          userData.username = 'KK789';
+          request(app)
+            .put(`/api/users/${userData.userserno}`)
+            .send(userData)
+            .expect(httpStatus.OK)
+            .then((res) => {
+              console.debug('res.body:', res.body);
+              // expect(res.body.username).to.equal('KK789');
+              done();
+            })
+            .catch(done);
         })
         .catch(done);
     });
   });
 
-  describe.skip('# GET /api/users/', () => {
-    it('should get all users', (done) => {
-      request(app)
-        .get('/api/users')
-        .expect(httpStatus.OK)
-        .then((res) => {
-          expect(res.body).to.be.an('array');
-          done();
-        })
-        .catch(done);
-    });
-
-    it('should get all users (with limit and skip)', (done) => {
-      request(app)
-        .get('/api/users')
-        .query({ limit: 10, skip: 1 })
-        .expect(httpStatus.OK)
-        .then((res) => {
-          expect(res.body).to.be.an('array');
-          done();
-        })
-        .catch(done);
-    });
-  });
-
-  describe.skip('# DELETE /api/users/', () => {
+  describe('# DELETE /api/users/', () => {
     it('should delete user', (done) => {
+      userData.userid = 'gamekiki';
+      userData.username = 'gamekiki name';
+      userData.userpasswd = 'gamekiki@password';
       request(app)
-        .delete(`/api/users/${user._id}`)
-        .expect(httpStatus.OK)
+        .post('/api/auth/login')
+        .send(userData)
         .then((res) => {
-          expect(res.body.username).to.equal('KK');
-          expect(res.body.mobileNumber).to.equal(user.mobileNumber);
-          done();
+          userData.userserno = res.body.userserno;
+          request(app)
+            .delete(`/api/users/${userData.userserno}`)
+            .expect(httpStatus.OK)
+            .then((res) => {
+              // expect(res.body.username).to.equal('KK');
+              // expect(res.body.mobileNumber).to.equal(user.mobileNumber);
+              done();
+            })
+            .catch(done);
         })
         .catch(done);
     });

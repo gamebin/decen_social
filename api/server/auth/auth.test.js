@@ -24,20 +24,22 @@ describe('## Auth APIs', () => {
   let jwtToken;
 
   describe('# POST /api/auth/signup', () => {
-    it.skip('should return create success code', done => {
+    it('should return create success code', done => {
       request(app)
         .post('/api/auth/signup')
         .send(validUserCredentials)
         .expect(httpStatus.OK)
-        // .then(res => {
-        //   expect(res.body).to.have.property('token');
-        //   jwt.verify(res.body.token, config.jwtSecret, (err, decoded) => {
-        //     expect(err).to.not.be.ok; // eslint-disable-line no-unused-expressions
-        //     expect(decoded.username).to.equal(validUserCredentials.username);
-        //     jwtToken = `Bearer ${res.body.token}`;
-        //     done();
-        //   });
-        // })
+        .then(res => {
+          done();
+          // console.debug('/api/auth/signup res.body:', res.body);
+          // expect(res.body).to.have.property('token');
+          // jwt.verify(res.body.token, config.jwtSecret, (err, decoded) => {
+          //   expect(err).to.not.be.ok; // eslint-disable-line no-unused-expressions
+          //   expect(decoded.username).to.equal(validUserCredentials.username);
+          //   jwtToken = `Bearer ${res.body.token}`;
+          //   done();
+          // });
+        })
         .catch(done);
     });
   });
@@ -61,6 +63,7 @@ describe('## Auth APIs', () => {
         .send(validUserCredentials)
         .expect(httpStatus.OK)
         .then(res => {
+          console.debug('res.body:', res.body);
           expect(res.body).to.have.property('token');
           jwt.verify(res.body.token, config.jwtSecret, (err, decoded) => {
             expect(err).to.not.be.ok; // eslint-disable-line no-unused-expressions
@@ -69,6 +72,25 @@ describe('## Auth APIs', () => {
             done();
           });
         })
+        .catch(err => { console.error(err); done(err); });
+    });
+  });
+
+  describe('# POST /api/auth/signup', () => {
+    it.skip('should return create success code', done => {
+      request(app)
+        .post('/api/auth/signup')
+        .send(validUserCredentials)
+        .expect(httpStatus.OK)
+        // .then(res => {
+        //   expect(res.body).to.have.property('token');
+        //   jwt.verify(res.body.token, config.jwtSecret, (err, decoded) => {
+        //     expect(err).to.not.be.ok; // eslint-disable-line no-unused-expressions
+        //     expect(decoded.username).to.equal(validUserCredentials.username);
+        //     jwtToken = `Bearer ${res.body.token}`;
+        //     done();
+        //   });
+        // })
         .catch(done);
     });
   });

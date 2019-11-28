@@ -1,22 +1,20 @@
 /* jshint indent: 2 */
 
-module.exports = function(sequelize, DataTypes) {
+module.exports = function (sequelize, DataTypes) {
   return sequelize.define('db_shared', {
-    sharedSerno: {
-      type: DataTypes.INTEGER(11),
-      allowNull: false,
-      primaryKey: true,
-      autoIncrement: true
+    sharedSerno : {
+      type          : DataTypes.INTEGER(11),
+      allowNull     : false,
+      primaryKey    : true,
+      autoIncrement : true
     },
-    boardSerno: {
-      type: DataTypes.INTEGER(11),
-      allowNull: true
+    boardSerno : {
+      type      : DataTypes.INTEGER(11),
+      allowNull : true
     },
-    userId: {
-      type: DataTypes.STRING(20),
-      allowNull: true
+    userId : {
+      type      : DataTypes.STRING(20),
+      allowNull : true
     }
-  }, {
-    tableName: 'db_shared'
-  });
+  }, { tableName: 'db_shared' });
 };

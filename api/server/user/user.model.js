@@ -57,7 +57,7 @@ var updateUser = userData => {
   const sequelize = SequelizeGen.createConnection();
   const User = sequelize.import('../../db/models/db_user');
 
-  console.debug('updateUser.userData:', userData);
+  // console.debug('updateUser.userData:', userData);
   return User.update(userData, { where: { userserno: userData.userserno } })
     .then(user => {
       return User.findOne({ where: { userserno: userData.userserno } });
@@ -72,4 +72,21 @@ var updateUser = userData => {
     });
 };
 
-module.exports = { getUserInfoBySerno, getUserInfoByUserId, createUser, updateUser };
+var deleteUser = userData => {
+  const sequelize = SequelizeGen.createConnection();
+  const User = sequelize.import('../../db/models/db_user');
+
+  return User.destroy({ where: { userserno: userData.userserno } })
+    .then(user => {
+      return user ? Promise.resolve(user) : Promise.reject(new APIError('No such user exists!', httpStatus.NOT_FOUND));
+    })
+    .catch(err => {
+      console.error(err);
+      return Promise.reject(err);
+    })
+    .finally(() => {
+      sequelize.close();
+    });
+};
+
+module.exports = { getUserInfoBySerno, getUserInfoByUserId, createUser, updateUser, deleteUser };

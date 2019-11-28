@@ -1,6 +1,6 @@
 verbose: false
 instrumentation:
-  excludes: ['dist/**', 'coverage/**', 'index.js']
+  excludes: ['dist/**', 'coverage/**', 'index.js', 'db/models/*.js']
   include-all-sources: true
 reporting:
     print: summary
