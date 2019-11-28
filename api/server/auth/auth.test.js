@@ -25,7 +25,6 @@ describe('## Auth APIs', () => {
 
   describe('# POST /api/auth/signup', () => {
     it('should return create success code', done => {
-      this.timeout(10000);
       request(app)
         .post('/api/auth/signup')
         .send(validUserCredentials)
