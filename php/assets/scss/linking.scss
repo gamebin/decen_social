@@ -1,0 +1,97 @@
+@import "../../assets/vendor/bootstrap-4.3.1/scss/functions";
+@import "../../assets/vendor/bootstrap-4.3.1/scss/variables";
+@import "offcanvas";
+
+html {
+  body {
+
+    .table {
+      tr {
+        th,
+        td {
+          word-break: keep-all;;
+        }
+      }
+    }
+
+    .post {
+      margin: 1rem 0;
+      padding: 1rem;
+      background-color: $white;
+      box-shadow: $box-shadow-sm;
+      border-radius: 0.25rem; 
+
+      .post-header {
+        display: flex;
+        align-content: center;
+        line-height: 1.25;
+
+        .user-name {
+          font-size: $font-size-base;
+          margin: 0 0 0 0.5rem;
+
+          display: inline;
+          // font-weight: $font-weight-normal;
+        }
+        .user-link {
+          font-size: $font-size-sm;
+          text-decoration: dotted;
+
+          margin: 0 0 0 0.25rem;
+        }
+        .date {
+          color: $text-muted;
+          margin: 0 0 0 0.5rem;
+          display: block;
+        }
+      }
+    }
+
+    .reply,
+    .re-reply {
+      .user-name,
+      .date {
+        line-height: 2;
+      }
+    }
+
+    .re-reply {
+      margin-left: 1rem;
+    }
+
+    .avatar {
+      width: 2rem;
+      height: 2rem;
+      background-image: url("../img/profile-square.png");
+      background-size: cover;
+      background-position: center center;
+      border-radius: 50%;
+      text-align: center;
+
+      &.avatar-lg {
+        width: 3rem;
+        height: 3rem;
+      }
+
+      &.avatar-xl {
+        width: 5rem;
+        height: 5rem;
+      }
+    }
+  }
+
+  .thumbnail {
+    width: 2rem;
+    height: 2rem;
+    background-image: url("../img/bg-landscape.png");
+    background-size: cover;
+    background-position: center center;
+  }
+}
+
+@media (min-width: 992px) {
+  html {
+    body {
+    }
+  }
+}

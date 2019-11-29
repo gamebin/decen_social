@@ -1,0 +1,131 @@
+<!doctype html>
+<html lang="ko">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <title>프로필 - Linking: Decentralized Social Networking</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Noto+Sans+KR:400,700|Roboto:400,700&display=swap&subset=korean">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.css">
+  <link rel="stylesheet" href="../assets/css/bootstrap.min.css">
+  <link rel="stylesheet" href="../assets/css/linking.css">
+</head>
+
+<body class="bg-light">
+  <nav class="navbar navbar-expand-lg fixed-top navbar-dark bg-primary shadow-sm" style="background: linear-gradient(135deg, rgba(0,212,255,1) 0%, rgba(0,123,255,1) 100%);">
+    <a class="navbar-brand mr-auto mr-lg-0" href="#"><img src="../assets/img/logo-light.svg" style="height: 2rem;"></a>
+    <button class="navbar-toggler p-0 border-0" type="button" data-toggle="offcanvas">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="navbar-collapse offcanvas-collapse">
+      <ul class="navbar-nav ml-auto">
+        <li class="nav-item active">
+          <a class="nav-link" href="#"><i class="fas fa-box-open"></i> <span class="d-inline d-lg-none ml-1">상품 리스트</span></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#"><i class="fas fa-user"></i> <span class="d-inline d-lg-none ml-1">마이페이지</span></a>
+        </li>
+      </ul>
+      <form class="form-inline my-2 my-lg-0 ml-lg-3">
+        <div class="input-group">
+          <input type="text" class="form-control border-light" placeholder="검색">
+          <div class="input-group-append">
+            <button class="btn btn-outline-light" type="button" id="button-addon2"><i class="fas fa-search"></i></button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </nav>
+
+  <main role="main" class="container">
+
+    <div class="row mt-3">
+      <div class="col-12 col-lg-6 mx-auto">
+
+        <div class="p-4 my-3 bg-white rounded shadow-sm">
+          <div class="text-center">
+            <div class="avatar avatar-xl mb-3 mx-auto" style="background-image: url('../assets/img/profile.jpg');"></div>
+
+            <div style="position: relative; overflow: hidden; display: inline-block;">
+              <button type="button" class="btn btn-sm btn-outline-primary rounded-pill mb-3">사진 변경</button>
+              <input type="file" style="font-size: 10rem; position: absolute; left: 0; top: 0; opacity: 0;" />
+            </div>
+
+            <h5>홍길동</h5>
+            <a href="#">linking.com/myUserName</a>
+          </div>
+
+          <div class="d-flex justify-content-around my-3">
+            <div>팔로워 <a href="#" class="badge badge-primary badge-pill">14</a></div>
+            <div>팔로잉 <a href="#" class="badge badge-primary badge-pill">2</a></div>
+            <div><a href="#"><i class="fas fa-box-open"></i></a></div>
+          </div>
+          <p class="mb-0 text-center">홍길동입니다. 소개글이 들어가는 자리입니다.</p>
+        </div>
+
+        <div class="my-3">
+          <div class="input-group mb-3">
+            <div class="input-group-prepend">
+              <span class="input-group-text">이름</span>
+            </div>
+            <input type="text" class="form-control" value="홍길동">
+          </div>
+
+          <div class="input-group mb-3">
+            <div class="input-group-prepend">
+              <span class="input-group-text">소개글</span>
+            </div>
+            <textarea class="form-control" rows="5">홍길동입니다. 소개글이 들어가는 자리입니다.</textarea>
+          </div>
+
+          <div class="input-group mb-3">
+            <div class="input-group-prepend">
+              <span class="input-group-text">이메일</span>
+            </div>
+            <input type="email" class="form-control" value="email@email.com">
+          </div>
+
+          <div class="input-group mb-3">
+            <div class="input-group-prepend">
+              <span class="input-group-text">비밀번호</span>
+            </div>
+            <input type="text" class="form-control">
+          </div>
+
+          <div class="input-group mb-3">
+            <div class="input-group-prepend">
+              <span class="input-group-text">비밀번호 확인</span>
+            </div>
+            <input type="text" class="form-control">
+          </div>
+
+          <button type="submit" class="btn btn-block btn-primary">저장</button>
+        </div>
+
+      </div>
+
+    </div>
+  </main>
+  <footer>
+    <p class="mt-5 mb-0 p-3 text-muted border-top">© 2019</p>
+  </footer>
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+  <script>
+    $(function () {
+      'use strict'
+      $('[data-toggle="offcanvas"]').on('click', function () {
+        $('.offcanvas-collapse').toggleClass('open')
+      })
+    })
+
+    $(function () {
+      $('[data-toggle="popover"]').popover()
+    })
+
+  </script>
+</body>
+
+</html>
