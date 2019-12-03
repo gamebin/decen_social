@@ -13,14 +13,15 @@
           <a class="nav-link" href="./profile.php"><i class="fas fa-user"></i> <span class="d-inline d-lg-none ml-1">마이페이지</span></a>
         </li>
       </ul>
-      <form class="form-inline my-2 my-lg-0 ml-lg-3">
+<form class="form-inline my-2 my-lg-0 ml-lg-3">
+    <input style="visibility:hidden; width: 0px">
         <div class="input-group">
-          <input type="text" class="form-control border-light" placeholder="검색">
+          <input type="text" id="top_schStr" class="form-control border-light" onkeyup="sch_onkeyup(event)" placeholder="검색">
           <div class="input-group-append">
-            <button class="btn btn-outline-light" type="button" id="button-addon2"><i class="fas fa-search"></i></button>
+            <button class="btn btn-outline-light" onclick="go_search()" type="button" id="button-addon2"><i class="fas fa-search"></i></button>
           </div>
         </div>
-      </form>
+</form>
     </div>
   </nav>
 <script>
@@ -30,8 +31,27 @@ function go_profile(userid) {
 	document.nav_frm.action = "./profile.php";
 	document.nav_frm.submit();
 }
+
+function go_search() {
+	schStr = $("#top_schStr").val();
+	if (!schStr) {
+		alert("검색어를 입력하세요");
+		return;
+	}
+	document.nav_frm.schStr.value = schStr;
+	document.nav_frm.method = "post";
+	document.nav_frm.action = "./search.php";
+	document.nav_frm.submit();
+}
+
+function sch_onkeyup(event) {
+	if (event.keyCode == 13) { // Enter 키 입력확인
+	  go_search();
+	}
+}
 </script>
 
 <form name="nav_frm" method="post">
   <input type="hidden" name="profileId" value="">
+  <input type="hidden" name="schStr" value="">
 </form>

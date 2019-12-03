@@ -25,7 +25,7 @@ location.href = "./timeline.php"
     <input type="email" id="inputEmail" onkeyup="email_onkeyup(event)" maxlength="30" class="form-control mb-3" placeholder="이메일" required="">
     <button class="btn btn-lg btn-outline-dark btn-block" onclick="find_userid()" type="button">아이디 확인</button>
     <div class="signin-links my-3"><a href="./sign-in.php">로그인</a><a href="./sign-up.php">회원가입</a><a href="./find-password.php">비밀번호 확인</a></div>
-    <p class="mt-5 mb-3 text-muted">© 2019</p>
+    <p class="mt-5 mb-3 text-muted">© GPL 2.0 License. Powered by Gamebin inc</p>
   </form>
 
   <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>

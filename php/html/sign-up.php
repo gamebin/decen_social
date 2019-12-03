@@ -56,7 +56,7 @@ location.href = "./timeline.php"
 
     <button class="btn btn-lg btn-outline-dark btn-block" type="button" onclick="fn_sign_up();" id="btn_write">가입하기</button>
     <div class="signin-links my-3"><a href="./sign-in.php">로그인</a><a href="./find-userid.php">아이디 확인</a><a href="./find-password.php">비밀번호 확인</a></div>
-    <p class="mt-5 mb-3 text-muted">© 2019</p>
+    <p class="mt-5 mb-3 text-muted">© GPL 2.0 License. Powered by Gamebin inc</p>
  
     <input type="hidden" id="userid_chk" value="N">
     <input type="hidden" id="email_chk" value="N">
