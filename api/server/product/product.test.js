@@ -47,7 +47,7 @@ describe("## Product APIs", () => {
           done();
         })
         .catch(done);
-    });
+    }).timeout(10000);
   });
 
   describe("# GET /api/products/:productSerno", () => {

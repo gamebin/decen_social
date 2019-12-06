@@ -121,7 +121,7 @@ describe("## Auth APIs", () => {
           //   });
         })
         .catch(done);
-    });
+    }).timeout(10000);
   });
 
   describe("# GET /api/auth/random-number", () => {

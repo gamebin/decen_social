@@ -70,7 +70,7 @@ describe("## Linking APIs", () => {
           console.error(err);
           done(err);
         });
-    });
+    }).timeout(10000);
   });
 
   describe("# DELETE /api/linking/remove", () => {
@@ -98,6 +98,6 @@ describe("## Linking APIs", () => {
           done();
         })
         .catch(done);
-    });
+    }).timeout(10000);
   });
 });

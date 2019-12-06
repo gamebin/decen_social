@@ -69,7 +69,7 @@ describe("## Board APIs", () => {
           console.error(err);
           done(err);
         });
-    });
+    }).timeout(10000);
   });
 
   describe("# GET /api/boards/:boardSerno", () => {
