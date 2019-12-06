@@ -5,11 +5,21 @@ const paramValidation = require("../../config/param-validation");
 const authCtrl = require("./auth.controller");
 const config = require("../../config/config");
 const userCtrl = require("../user/user.controller");
+const CryptoUtil = require("../helpers/CryptoUtil");
 
 const router = express.Router(); // eslint-disable-line new-cap
 
 /** POST /api/auth/login - Returns token if correct userid and userpasswd is provided */
 router.route("/login").post(validate(paramValidation.login), authCtrl.login);
+
+/** POST /api/auth/logout - Returns success or fail */
+router
+  .route("/logout")
+  .post(
+    validate(paramValidation.logout),
+    CryptoUtil.isLoggedIn,
+    authCtrl.logout
+  );
 
 /** POST /api/auth/signup - Returns ok if correct userid and userpasswd is provided */
 router

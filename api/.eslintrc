@@ -78,7 +78,7 @@
         "consistent": true
       }
     ],
-    "max-len": ["error", { "code": 300 }],
+    "max-len": ["error", { "code": 230 }],
     // "function-paren-newline": ["error", "never"],
     "no-multi-spaces": [
       "error",
