@@ -70,7 +70,7 @@ describe("## User APIs", () => {
           done();
         })
         .catch(done);
-    });
+    }).timeout(10000);
 
     it("should create a auth error", done => {
       request(app)
