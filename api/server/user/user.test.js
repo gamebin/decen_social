@@ -9,6 +9,7 @@ const faker = require("faker/locale/en");
 let fake_userid = faker.internet.userName().substr(0, 10);
 let fake_username = faker.name.findName().substr(0, 10);
 let fake_userpasswd = pad(faker.random.number(1000000, 9999999, 0), 4, 0);
+let fake_useremail = faker.internet.email();
 
 function pad(n, width, z) {
   z = z || "0";
@@ -17,12 +18,6 @@ function pad(n, width, z) {
 }
 
 chai.config.includeStack = true;
-
-let userData = {
-  userid     : "gamekiki",
-  username   : "gamekiki name",
-  userpasswd : "gamekiki@password"
-};
 
 beforeEach(async () => {
   // const reqData = { userid: 'gamekiki', username: 'gamekiki name', userpasswd: 'gamekiki@password' };
@@ -50,28 +45,34 @@ after(done => {
   done();
 });
 
-describe.skip("## User APIs", () => {
+describe("## User APIs", () => {
+  let userData = {
+    userid     : fake_userid,
+    userpasswd : fake_userpasswd,
+    username   : fake_username,
+    email      : fake_useremail
+  };
+
+  const invalidUserCredentials = {
+    userid     : "gamekiki",
+    userpasswd : "gamekiki@"
+  };
+
   describe("# POST /api/users", () => {
     it("should create a new user", done => {
-      userData.userid = fake_userid;
-      userData.username = fake_username;
-      // userData.userpasswd = fake_userpasswd;
       request(app)
         .post("/api/users")
         .send(userData)
         .expect(httpStatus.OK)
         .then(res => {
-          expect(res.body.username).to.equal(userData.username);
-          user = res.body;
+          expect(res.body.success).to.equal(true);
+          // user = res.body;
           done();
         })
         .catch(done);
     });
 
     it("should create a auth error", done => {
-      userData.userid = "gamekiki";
-      userData.username = fake_username;
-      // userData.userpasswd = fake_userpasswd;
       request(app)
         .post("/api/users")
         .send(userData)
@@ -85,16 +86,24 @@ describe.skip("## User APIs", () => {
   });
 
   describe("# GET /api/users/:userId", () => {
+    it("should report error with message - Not found, when user does not exists", done => {
+      request(app)
+        .get("/api/users/56c787ccc")
+        .expect(httpStatus.NOT_FOUND)
+        .then(res => {
+          expect(res.body.message).to.equal("Not Found");
+          done();
+        })
+        .catch(done);
+    });
+
     it("should get user details", done => {
-      userData.userid = "gamekiki";
-      userData.username = "gamekiki name";
-      userData.userpasswd = "gamekiki@password";
       request(app)
         .post("/api/auth/login")
         .send(userData)
         .then(res => {
           userData.userserno = res.body.userserno;
-          console.debug("userData:", userData);
+          // console.debug("userData:", userData);
           request(app)
             .get(`/api/users/${userData.userserno}`)
             .expect(httpStatus.OK)
@@ -106,40 +115,22 @@ describe.skip("## User APIs", () => {
         })
         .catch(done);
     }).timeout(10000);
-
-    it("should report error with message - Not found, when user does not exists", done => {
-      request(app)
-        .get("/api/users/56c787ccc")
-        .expect(httpStatus.NOT_FOUND)
-        .then(res => {
-          expect(res.body.message).to.equal("Not Found");
-          done();
-        })
-        .catch(done);
-    });
   });
 
   describe("# PUT /api/users/:userId", () => {
     it("should update user details", done => {
-      userData.userid = "gamekiki";
-      userData.username = "gamekiki name";
-      userData.userpasswd = "gamekiki@password";
+      // userData.userid = "gamekiki";
+      // userData.username = "gamekiki name";
+      // userData.userpasswd = "gamekiki@password";
+      userData.username = "KK789";
       request(app)
-        .post("/api/auth/login")
+        .put(`/api/users/${userData.userserno}`)
         .send(userData)
+        .expect(httpStatus.OK)
         .then(res => {
-          userData.userserno = res.body.userserno;
-          userData.username = "KK789";
-          request(app)
-            .put(`/api/users/${userData.userserno}`)
-            .send(userData)
-            .expect(httpStatus.OK)
-            .then(res => {
-              console.debug("res.body:", res.body);
-              // expect(res.body.username).to.equal('KK789');
-              done();
-            })
-            .catch(done);
+          console.debug("res.body:", res.body);
+          // expect(res.body.username).to.equal('KK789');
+          done();
         })
         .catch(done);
     }).timeout(10000);
@@ -147,23 +138,16 @@ describe.skip("## User APIs", () => {
 
   describe("# DELETE /api/users/", () => {
     it("should delete user", done => {
-      userData.userid = "gamekiki";
-      userData.username = "gamekiki name";
-      userData.userpasswd = "gamekiki@password";
+      // userData.userid = "gamekiki";
+      // userData.username = "gamekiki name";
+      // userData.userpasswd = "gamekiki@password";
       request(app)
-        .post("/api/auth/login")
-        .send(userData)
+        .delete(`/api/users/${userData.userserno}`)
+        .expect(httpStatus.OK)
         .then(res => {
-          userData.userserno = res.body.userserno;
-          request(app)
-            .delete(`/api/users/${userData.userserno}`)
-            .expect(httpStatus.OK)
-            .then(res => {
-              // expect(res.body.username).to.equal('KK');
-              // expect(res.body.mobileNumber).to.equal(user.mobileNumber);
-              done();
-            })
-            .catch(done);
+          // expect(res.body.username).to.equal('KK');
+          // expect(res.body.mobileNumber).to.equal(user.mobileNumber);
+          done();
         })
         .catch(done);
     }).timeout(10000);

@@ -74,7 +74,21 @@ describe("## Linking APIs", () => {
   });
 
   describe("# DELETE /api/linking/remove", () => {
+    it("should report error", done => {
+      friendData.friendId = "test1234";
+      request(app)
+        .delete(`/api/linking/remove`)
+        .set(headers)
+        .send(friendData)
+        .expect(httpStatus.NOT_FOUND)
+        .then(res => {
+          done();
+        })
+        .catch(done);
+    }).timeout(10000);
+
     it("should delete friend", done => {
+      friendData.friendId = "Madisyn89";
       request(app)
         .delete(`/api/linking/remove`)
         .set(headers)

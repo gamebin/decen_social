@@ -72,7 +72,7 @@ var createLiked = likedData => {
 
   return Liked.create(likedData)
     .then(liked => {
-      console.debug("liked:", liked);
+      // console.debug("liked:", liked);
       return Liked.findOne({
         where : { boardSerno: likedData.boardSerno, userId: likedData.userId },
         raw   : true

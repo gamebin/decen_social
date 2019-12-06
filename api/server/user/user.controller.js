@@ -42,6 +42,7 @@ async function create(req, res, next) {
     regYHS     : new Date(),
     userIp     : userIp
   };
+  console.debug("create.userData:", userData);
 
   User.getUserInfoByUserId(req.body.userid)
     .then(userInfo => {
@@ -66,6 +67,7 @@ async function create(req, res, next) {
       }
     })
     .catch(e => {
+      console.debug("e:", e);
       User.createUser(userData)
         .then(savedUser => {
           let rtnValue = {
