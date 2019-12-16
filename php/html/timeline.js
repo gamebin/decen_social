@@ -39,14 +39,36 @@ function GoWrite_review(num) {
         contentType: 'application/x-www-form-urlencoded;charset=UTF-8', 
         dataType: 'html',
         success: function (data) {
-console.log("data="+data)
-console.log("num="+num)
+//console.log("data="+data)
+//console.log("num="+num)
 		  $("#pro_con01_"+num).empty();
 		  $(data).appendTo($("#pro_con01_"+num));
 	      $("#review_cont_"+num).val('');
 		  reviewcnt = $("#review_cnt_"+num).text();
 		  reviewcnt = Number(reviewcnt) + 1;
 	      $("#review_cnt_"+num).text(reviewcnt);
+	    },
+        error: function(xhr, status, error) {
+		 alert("error : "+error);
+	    }
+ 	});
+}
+
+function remove_board(Serno) {
+	$.ajax({
+        url: './timeline_removeAjax.php?callback=?',
+        type: 'POST',
+		data: {
+		  "Serno": Serno,
+       },
+        contentType: 'application/x-www-form-urlencoded;charset=UTF-8', 
+        dataType: 'json',
+        success: function (data) {
+			if(data.prog == "true"){
+			  $("#board_"+Serno).remove();
+			} else {
+				alert(data.msg);
+			}
 	    },
         error: function(xhr, status, error) {
 		 alert("error : "+error);
@@ -135,4 +157,26 @@ function go_detail(num, uri){
   document.list.method = "post";
   document.list.action = "product-detail.php";
   document.list.submit();
+}
+
+function go_delproduct(Serno) {
+	$.ajax({
+        url: './product_removeAjax.php?callback=?',
+        type: 'POST',
+		data: {
+		  "Serno": Serno,
+       },
+        contentType: 'application/x-www-form-urlencoded;charset=UTF-8', 
+        dataType: 'json',
+        success: function (data) {
+			if(data.prog == "true"){
+			  $("#product_"+Serno).remove();
+			} else {
+				alert(data.msg);
+			}
+	    },
+        error: function(xhr, status, error) {
+		 alert("error : "+error);
+	    }
+ 	});
 }

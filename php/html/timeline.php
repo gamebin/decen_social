@@ -152,11 +152,11 @@ IF ($imageurl) {
               <a href="#" class="user-link">linking.kr/<?=$userid?></a>
               <small class="date"><?=$regYHS?></small>
             </div>
-<?	if ($userid == $UserID and !$UserID) {	?>
+<?	if ($userid == $UserID and $UserID) {	?>
             <a href="#" class="ml-auto text-muted" id="post-menu-01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-ellipsis-h"></i></a>
             <div class="dropdown-menu" aria-labelledby="post-menu-01">
-              <a class="dropdown-item" href="#">수정</a>
-              <a class="dropdown-item" href="#">삭제</a>
+     <!--         <a class="dropdown-item" href="#">수정</a> -->
+              <a class="dropdown-item" href="javascript:remove_board('<?=$boardSerno?>')">삭제</a>
             </div>
 <?	}	?>
           </div>
@@ -249,7 +249,7 @@ IF ($reviewimage) {
 	}  //  if($totcnt == 0) {		?>
 		  </div>
 
-          <div class="text-right"><a href="#"><small>댓글(5) 더보기 <i class="fas fa-chevron-down"></i></small></a></div>
+          <!-- <div class="text-right"><a href="#"><small>댓글(5) 더보기 <i class="fas fa-chevron-down"></i></small></a></div> -->
         </article>
 <?		  }
 		mysqli_free_result( $result);

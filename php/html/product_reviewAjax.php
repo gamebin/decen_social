@@ -1,6 +1,7 @@
 <?	include "./this_user.php";
 
 	$cur_page = kiki_isnumb($_POST["cur_page"]) ;
+	$no = kiki_isnumb($_POST["num"]) ;
 	if (!$cur_page) {
 		$cur_page = 1;
 	}

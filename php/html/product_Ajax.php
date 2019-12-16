@@ -68,7 +68,7 @@ IF ($imageurl) {
 	if (substr($imageurl,0,9) != "../assets") {
 		$temp_name2 = explode('||',$imageurl); 
 		$original_file2 = $temp_name2[0];
-		$productimg = "../data/profile/".$original_file2;
+		$productimg = "../data/product/".$original_file2;
 	} else {
 		$productimg = $imageurl;
 	}
@@ -92,7 +92,7 @@ IF ($imageurl) {
 		$liked_txt = "far fa-heart fa-lg";
 	}
 
-$result_stmt .= "<article class='post'> ";
+$result_stmt .= "<article class='post' id='product_$no'> ";
 $result_stmt .= " <div class='post-header mb-3'> ";
 $result_stmt .= "  <div class='avatar' style='background-image: url(\"$profileImg\");'></div> ";
 $result_stmt .= "  <div> ";
@@ -103,7 +103,7 @@ $result_stmt .= "  </div> ";
 	if ($userid == $UserID and $UserID) {
 $result_stmt .= "  <a href='#' class='ml-auto text-muted' id='post-menu-01' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false'><i class='fas fa-ellipsis-h'></i></a> ";
 $result_stmt .= "  <div class='dropdown-menu' aria-labelledby='post-menu-01'> ";
-$result_stmt .= "   <a class='dropdown-item' href='#'>삭제</a> ";
+$result_stmt .= "   <a class='dropdown-item' href='javascript:go_delproduct(\"$no\")'>삭제</a> ";
 $result_stmt .= "  </div> ";
 	}
 $result_stmt .= " </div> ";

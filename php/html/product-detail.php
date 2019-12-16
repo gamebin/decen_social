@@ -59,7 +59,7 @@ IF ($imageurl) {
 	if (substr($imageurl,0,9) != "../assets") {
 		$temp_name2 = explode('||',$imageurl); 
 		$original_file2 = $temp_name2[0];
-		$productimg = "../data/profile/".$original_file2;
+		$productimg = "../data/product/".$original_file2;
 	} else {
 		$productimg = $imageurl;
 	}
@@ -70,7 +70,7 @@ IF ($imageurl) {
 		$regYHS = date_format($regYHS, "Y. m. d");
 		$reviewcnt = $row["reviewcnt"];	
 		$boardtext = $row["boardtext"];
-		$boardtext = stripslashes($boardtext);
+		$boardtext = stripslashes(nl2br($boardtext));
 
 		$price = $row["price"];
 	if ($price) {
@@ -273,6 +273,7 @@ function load_cont(){
         type: 'POST',
 		data: {
 		  "cur_page": 1,
+		  "num": "<?=$num?>",
        },
         contentType: 'application/x-www-form-urlencoded;charset=UTF-8', 
         dataType: 'html',

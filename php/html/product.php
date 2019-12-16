@@ -122,6 +122,28 @@ function go_detail(num, uri){
   document.list.action = "product-detail.php";
   document.list.submit();
 }
+
+function go_delproduct(Serno) {
+	$.ajax({
+        url: './product_removeAjax.php?callback=?',
+        type: 'POST',
+		data: {
+		  "Serno": Serno,
+       },
+        contentType: 'application/x-www-form-urlencoded;charset=UTF-8', 
+        dataType: 'json',
+        success: function (data) {
+			if(data.prog == "true"){
+			  $("#product_"+Serno).remove();
+			} else {
+				alert(data.msg);
+			}
+	    },
+        error: function(xhr, status, error) {
+		 alert("error : "+error);
+	    }
+ 	});
+}
 </script>
 
 </body>
