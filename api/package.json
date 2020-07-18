@@ -83,7 +83,7 @@
     "husky": "0.14.3",
     "istanbul": "1.1.0-alpha.1",
     "jsdiff": "^1.1.1",
-    "lodash": "^4.17.15",
+    "lodash": "^4.17.19",
     "merge": "^1.2.1",
     "mocha": "^6.0.0",
     "node-growl": "^0.1.1",
